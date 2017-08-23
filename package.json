@@ -1,0 +1,29 @@
+{
+  "name": "concert",
+  "version": "1.0.0",
+  "description": "2nd capstone project",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.5.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AFish622/concert.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AFish622/concert/issues"
+  },
+  "homepage": "https://github.com/AFish622/concert#readme"
+}
