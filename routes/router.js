@@ -4,8 +4,6 @@ const passport = require('passport')
 
 const {User} = require('../models/users');
 
-console.log("USSSSEEERR", User)
-
 
 const userRouter = express.Router();
 const jsonParser = bodyParser.json();
@@ -58,7 +56,7 @@ userRouter.post('/', (req, res) => {
 			min: 1
 		},
 		password: {
-			min: 10,
+			min: 8,
 			max: 72
 		}
 	};
@@ -89,30 +87,40 @@ userRouter.post('/', (req, res) => {
 	// console.log("USER", User)
 
 	return User
-		.find({username})
-		.count()
-		.then(count => {
-			console.log("user-------", User)
-			if (count > 0) {
-				console.log('user already saved')
-				return Promise.reject({
-					code: 422,
-					reason: 'ValidationError',
-					message: 'Username already taken',
-					location: 'username'
-				});
-			}
+		.findOne({username})
+		// .count()
+		// .then(count => {
+		// 	// console.log("user-------", User)
+		// 	if (count > 0) {
+		// 		console.log('user already saved')
+		// 		return Promise.reject({
+		// 			code: 422,
+		// 			reason: 'ValidationError',
+		// 			message: 'Username already taken',
+		// 			location: 'username'
+		// 		});
+		// 	}
 
-			return User.hashPasword(password)
-		})
-		.then(hash => {
-			return User
-				.create({
-					username,
-					password: hash,
-					firstName,
-					lastName
-				})
+		// 	return User.find({username})
+		// })
+		.then(user => {
+			console.log("USERRRR", user)
+			if (!user){
+				let _user = new User()
+				_user.username = username;
+				_user.password = password;
+				return _user.save()
+			}
+			else {
+				return Promise.reject();
+			}
+			// return User
+			// 	.create({
+			// 		username,
+			// 		password: hash,
+			// 		firstName,
+			// 		lastName
+			// 	})
 		})
 		.then(user => {
 			return res.status(201).json(user.apiRepr());

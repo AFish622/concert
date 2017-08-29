@@ -38,16 +38,36 @@
 //youtube clip
 //related artist
 
-
-
-
-const getData = function() {
-	$.getJSON("http://api.songkick.com/api/3.0/search/artists.json?query=flume&apikey=y6tnZdtdNsMK4JG3", function(data) {
-		console.log(data.resultsPage.results.artist);
+var searchRequest = function() {
+	$('.main-form').submit(function(event) {
+		event.preventDefault();
+		const query = $('.main-search').val();
+		$('.main-search').val('');
+		getData(query);
 	})
+}
+
+const getData = function(query) {
+	$.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y6tnZdtdNsMK4JG3&artist_name=" + query, function(data) {
+		if (data.resultsPage.totalEntries === 0) {
+			alert('No results found')
+		}
+		else {
+			$('.search-results').append('<p>' + data.resultsPage.results.event[0].displayName + '<p>');
+		}
+		console.log(data.resultsPage.results.event[0].displayName);
+		for (let i = 0; i < data.length; i++) {
+			console.log(data.resultsPage.results.event[0]);
+		}
+	})
+}
+
+const renderResults = function(data) {
+
 }
 
 
 $(function() {
-	getData();
+	searchRequest()
+	// getData();
 })

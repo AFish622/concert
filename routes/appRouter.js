@@ -21,6 +21,11 @@ appRouter.get('/signup', (req, res) => {
 	res.render('signup')
 });
 
+appRouter.get('/concert', (req, res) => {
+	res.render('/concert')
+});
+
+
 module.exports = {appRouter}
 
 

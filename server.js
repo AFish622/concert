@@ -31,10 +31,10 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 passport.use(basicStrategy);
 passport.use(jwtStrategy);
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('common'));
 app.set('view engine', 'ejs');
-
+console.log("PUBBBBBBBBB", __dirname + '/public')
 
 app.use('/api/users/', userRouter);
 app.use('/api/auth/', authRouter);
