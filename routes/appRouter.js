@@ -1,5 +1,3 @@
-// use to render pages
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport')
@@ -22,8 +20,12 @@ appRouter.get('/signup', (req, res) => {
 });
 
 appRouter.get('/concert', (req, res) => {
-	res.render('/concert')
+	res.render('concert')
 });
+
+appRouter.get('/myEvents', (req, res) => {
+	res.render('myEvents')
+})
 
 
 module.exports = {appRouter}

@@ -2,18 +2,27 @@
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body class="main-body">
-	<header><% include ./partials/nav %></header>
+	<header>
+		<% include ./partials/head %>
+	</header>
 
 	<div id="login-container">
 		<h1>Log in</h1>
-		<form class="signup-form" action="/api/users/" method="post">
+
+		<form class="signup-form" action="/api/protected/concert" method="get">
 			<input type="text" class="username-input" placeholder="username" name="username" required>
 			<input type="text" class="password-input" placeholder="password" name="password" required>
 			<input type="submit" class="signup-submit">
 			<p><a href="#">Don't have an account? Sign up</a></p>
 		</form>
+
+		<% console.log("message", message) %>
+	<% if (message.message) { %>
+		<p class="login-message"><%= message.message[0] %></p>
+	<% } %>
 	</div>
 
 </body>

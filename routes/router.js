@@ -25,7 +25,7 @@ userRouter.post('/', (req, res) => {
 		});
 	}
 
-	const stringFields = ['username', 'password'];
+	const stringFields = ['username', 'password', 'firstName', 'lastName'];
 	const nonStringFields = stringFields.find(field =>
 		(field in req.body) && typeof req.body[field] != 'string');
 
@@ -84,35 +84,32 @@ userRouter.post('/', (req, res) => {
 	firstName = firstName.trim();
 	lastName = lastName.trim();
 
-	// console.log("USER", User)
-
 	return User
 		.findOne({username})
-		// .count()
-		// .then(count => {
-		// 	// console.log("user-------", User)
-		// 	if (count > 0) {
-		// 		console.log('user already saved')
-		// 		return Promise.reject({
-		// 			code: 422,
-		// 			reason: 'ValidationError',
-		// 			message: 'Username already taken',
-		// 			location: 'username'
-		// 		});
-		// 	}
+		.count()
+		.then(count => {
+			if (count > 0) {
+				console.log('Username already used')
+				return Promise.reject({
+					code: 422,
+					reason: 'ValidationError',
+					message: 'Username already taken',
+					location: 'username'
+				});
+			}
 
-		// 	return User.find({username})
-		// })
+			return User.find({username})
+		})
 		.then(user => {
 			console.log("USERRRR", user)
-			if (!user){
+			if (!user.length){
 				let _user = new User()
 				_user.username = username;
 				_user.password = password;
 				return _user.save()
 			}
 			else {
-				return Promise.reject();
+				return res.redirect('/app/login')
 			}
 			// return User
 			// 	.create({
@@ -123,13 +120,20 @@ userRouter.post('/', (req, res) => {
 			// 	})
 		})
 		.then(user => {
-			return res.status(201).json(user.apiRepr());
+			return res.redirect('/app/login')
 		})
 		.catch(err => {
-			if (err.reason === 'ValidationError') {
-				return res.status(err.code).json(err);
+			console.log("ERRRRRR", err)
+
+			if (err.message === 'Username already taken') {
+				req.flash('message', 'Username exists, please login')
+				return res.redirect('/app/login')
 			}
-			console.log("ERROOOORRRR", err)
+
+			if (err.reason === 'ValidationError') {
+				req.flash('message', 'User name or password is incorrect')
+				return res.redirect('back')
+			}
 			res.status(500).json({code: 500, message: 'Internal server error'});
 		});
 });

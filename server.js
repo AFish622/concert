@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const morgan = require('morgan');
+const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 const {PORT, DATABASE_URL} = require('./config')
 const {userRouter} = require('./routes/router')
@@ -34,11 +37,21 @@ passport.use(jwtStrategy);
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('common'));
 app.set('view engine', 'ejs');
-console.log("PUBBBBBBBBB", __dirname + '/public')
+app.use(cookieParser());
+app.use(session({
+  secret: 'keyboard cat',
+}))
+
+app.use(flash());
+app.use(function(req, res, next) {
+    res.locals.message = req.flash();
+    next();
+});
 
 app.use('/api/users/', userRouter);
 app.use('/api/auth/', authRouter);
 app.use('/app/', appRouter);
+app.use('/api/protected', appRouter)
 
 app.get('/api/protected',
 	passport.authenticate('jwt', {session: false}),

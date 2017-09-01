@@ -12,12 +12,22 @@ const UserSchema = mongoose.Schema({
 	password: {
 		type: String,
 		required: true
+	},
+	firstName: {
+		type: String,
+		default: ""
+	},
+	lastName : {
+		type: String,
+		default: ""
 	}
-})
+});
 
 UserSchema.methods.apiRepr = function() {
 	return {
-		username: this.username 
+		username: this.username || '',
+		firstName: this.firstName || '',
+		lastName: this.lastName || ''
 	}
 }
 
@@ -48,8 +58,3 @@ UserSchema.pre('save', function(next) {
 const User = mongoose.model('User', UserSchema);
 
 module.exports = {User};
-
-// module.exports = mongoose.model('User', UserSchema);
-
-
-// export default const User = mongoose.model('User', UserSchema);

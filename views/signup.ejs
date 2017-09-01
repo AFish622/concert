@@ -6,25 +6,21 @@
 </head>
 <body class="main-body">
 <header>
-<% include ./partials/nav %>
+<% include ./partials/head %>
 </header>
 
-	<div class="signup-body">
 		<div id="signup-container">
-			<h2>Sign up</h2>
+			<h1>Sign up</h1>
 			<form class="signup-form" action="/api/users/" method="post">
 				<input type="text" class="username-input" placeholder="Username" name="username" required>
 				<input type="text" class="password-input" placeholder="Password" name="password" required>
-				<!-- <input type="text" placeholder="first name"> -->
-				<!-- <input type="text" placeholder="last name"> -->
+				<input type="text" class="firstname-input" placeholder="First name">
+				<input type="text" class="lastname-input" placeholder="Last name">
 				<input type="submit" class="signup-submit" value="Create Account">
 			</form>
-			</p><a href="#">Already have an account?</a></p>
+			</p><a class="account-link" href="#">Already have an account?</a></p>
 		</div>
-	</div>
 
-<footer>
-<% include ./partials/footer %>
-</footer>
+
 </body>
 </html>

@@ -16,7 +16,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
 	User
 		.findOne({username: username})
 		.then(_user => {
-			user=_user
+			user = _user;
 			console.log("USER", user)
 			if (!user) {
 				return Promise.reject({

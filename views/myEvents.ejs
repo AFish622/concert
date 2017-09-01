@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	  <link rel="stylesheet" type="text/css" href="/style.css">
+
+</head>
+<body class="main-body">
+	<header>
+		<% include ./partials/nav %>
+	</header>
+
+	<h1 class="title">Concert Calendar</h1>
+	<div class="my-events">
+		<table class="event-container">
+			<caption class="event-caption">My Events</caption>
+				<tr class="table-header">
+					<th>Event</th>
+					<th>Date</th>
+					<th>Location</th>
+				</tr>
+			
+
+			<tbody>
+				</tr>
+					<td>Flume</td>
+					<td>10/10/10</td>
+					<td>Bill Graham, San Francisco CA</td>
+				</tr>
+				<tr>
+					<td>Skrillex</td>
+					<td>11/11/11</td>
+					<td>Fox Theatre, Oakland CA</td>
+				</tr>
+				<tr>
+					<td>Coachella Valley Music Festical</td>
+					<td>12/12/12</td>
+					<td>Indio, CA</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<form>
+			<input class="new-event-button" type="button" value="Add New Event">
+		</form>
+	</div>
+
+	<div class="new-event-container hidden">
+			<h1>Create New Event</h1>
+			<form class="signup-form">
+				<input type="text" class="username-input" placeholder="Event Name" required>
+				<input type="text" class="password-input" placeholder="Date" required>
+				<input type="text" class="firstname-input" placeholder="Location">
+				<input type="text" class="lastname-input" placeholder="Time">
+				<input type="submit" class="signup-submit" value="Add Event">
+			</form>		
+	</div>
+
+	<script
+  		src="https://code.jquery.com/jquery-3.2.1.min.js"
+  		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  		crossorigin="anonymous">
+	</script>
+
+	<script type="text/javascript" src="/index.js"></script>
+</body>
+</html>

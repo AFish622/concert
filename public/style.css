@@ -1,17 +1,19 @@
-.signup-body {
-	background-color: red;
-}
+
 .nav-content li { 
-	color: white;
+	color: white !important;
 	list-style-type: none;
 	display: inline;
 	text-align: center;
 }
 
-/*a:-webkit-any-link {
+.account-link {
+	color: black;
+}
+
+a:-webkit-any-link {
 	color: white;
 }
-*/
+
 #logout-link {
 	float: right;
 	padding-right: 35px;
@@ -24,7 +26,7 @@
 .nav-bar {
 	text-align: center;
 	padding-top: 10px;
-	padding-bottom: 50px;
+	padding-bottom: 25px;
 	background-color: #333333;
 	font-size: 25px;
 }
@@ -33,7 +35,7 @@
 	font-size: 40px;
 }*/
 
-#signup-container, #login-container {
+#signup-container, #login-container, .new-event-container {
 	position: absolute;
 	width: 420px;
 	right: 500px;
@@ -43,9 +45,10 @@
 	padding-top: 25px;
 	padding-bottom: 25px;
 	background-color: #EBEDEF;
+	/*margin-top: 50px;*/
 }
 
-.signup-form .username-input, .signup-form .password-input, .signup-form .signup-submit  {
+.signup-form .username-input, .signup-form .password-input, .signup-form .firstname-input, .signup-form .lastname-input, .signup-form .signup-submit  {
 	display: block;
 	width: 400px;
 	height: 40px;
@@ -54,7 +57,7 @@
 	text-align: center;
 }
 
-.signup-form .username-input, .signup-form .password-input {
+.signup-form .username-input, .signup-form .password-input, .signup-form .firstname-input, .signup-form .lastname-input {
 	width: 75%;
 	margin-left: 50px;
 	border: 1px solid black;
@@ -77,8 +80,8 @@
 	width: 450px;
 	height: 40px;
 	font-size: 25px;
-	position: relative;
-	top: 150px;
+	/*position: relative;*/
+	/*top: 150px;*/
 	border: 1px solid black;
 }
 
@@ -86,7 +89,7 @@
 	height: 45px;
 	width: 100px;
 	position: relative;
-	top: 147px;
+	top: -3px;
 	background-color: #F5B041;
 	font-size: 20px;
 	border: 1px solid black;
@@ -102,10 +105,61 @@
     background: url(https://i.pinimg.com/originals/dd/42/de/dd42dea8a3fddd66ef507647c3c3fab7.jpg);
     background-size: 100% 890px;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-.results-conainer {
-	
+.results-container {
+	position: relative;
+	left: 350px;
+	top: 50px;
+	width: 50%;
+	/*height: 75px;*/
+	background-color: #B2BABB;
+	border: 1px solid black;
+	text-align: center;
 }
 
+.little-container {
+	border: 1px solid black;
+	padding-bottom: 5px;
+}
+
+.hidden {
+	display: none;
+}
+
+.event-container {
+	position: relative;
+	left: 350px;
+	background-color: #EBEDEF;
+	width: 50%;
+	height: 30px;
+	vertical-align: middle;
+}
+
+.login-message {
+	text-align: center;
+	color: red;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+}
+.event-caption {
+	color: white;
+	font-size: 40px;
+}
+
+.new-event-button {
+	background-color: #F5B041;
+	position: relative;
+	left: 648px;
+	width: 120px;
+	height: 40px;
+	margin-top: 25px;
+	font-size: 15px;
+	text-align: center;
+}
 
