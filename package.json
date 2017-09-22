@@ -14,12 +14,12 @@
     "express": "^4.15.4",
     "express-session": "^1.15.5",
     "jsonwebtoken": "^7.4.3",
-    "materialize-css": "^0.100.2",
     "mongoose": "^4.11.7",
     "morgan": "^1.8.2",
     "passport": "^0.4.0",
     "passport-http": "^0.3.0",
-    "passport-jwt": "^3.0.0"
+    "passport-jwt": "^3.0.0",
+    "songkick-api-node": "^1.0.2"
   },
   "devDependencies": {
     "chai": "^4.1.1",

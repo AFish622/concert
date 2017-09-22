@@ -9,10 +9,12 @@ const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const {PORT, DATABASE_URL} = require('./config')
-const {userRouter} = require('./routes/router')
-const {appRouter} = require('./routes/appRouter')
+
+const {PORT, DATABASE_URL} = require('./config');
+const {userRouter} = require('./routes/userRouter');
+const {appRouter} = require('./routes/appRouter');
 const {authRouter, basicStrategy, jwtStrategy} = require('./auth/index');
+const {songRouter} = require('./routes/songRouter');
 
 mongoose.Promise = global.Promise;
 
@@ -40,7 +42,10 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(session({
   secret: 'keyboard cat',
-}))
+  saveUninitialized: true,
+  resave: true
+}));
+
 
 app.use(flash());
 app.use(function(req, res, next) {
@@ -52,6 +57,7 @@ app.use('/api/users/', userRouter);
 app.use('/api/auth/', authRouter);
 app.use('/app/', appRouter);
 app.use('/api/protected', appRouter)
+app.use('/songkick/', songRouter);
 
 app.get('/api/protected',
 	passport.authenticate('jwt', {session: false}),

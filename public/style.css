@@ -10,8 +10,9 @@
 	color: black;
 }
 
-a:-webkit-any-link {
+a:-webkit-any-link, {
 	color: white;
+	text-align: center;
 }
 
 #logout-link {
@@ -63,7 +64,7 @@ a:-webkit-any-link {
 	border: 1px solid black;
 }
 
-.signup-form .signup-submit {
+.signup-form .signup-submit, {
 	height: 40px;
 	width: 200px;
 	position: relative;
@@ -108,16 +109,23 @@ a:-webkit-any-link {
     background-attachment: fixed;
 }
 
-.results-container {
+/*.results-container {
 	position: relative;
 	left: 350px;
 	top: 50px;
 	width: 50%;
-	/*height: 75px;*/
 	background-color: #B2BABB;
 	border: 1px solid black;
 	text-align: center;
 }
+*/
+
+.results-container {
+	background-color: #B2BABB;
+	width: 50%;
+	margin: auto;
+}
+
 
 .little-container {
 	border: 1px solid black;
@@ -137,19 +145,21 @@ a:-webkit-any-link {
 	vertical-align: middle;
 }
 
-.login-message {
+.login-message, .event-name {
 	text-align: center;
 	color: red;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 15px;
-}
 .event-caption {
 	color: white;
 	font-size: 40px;
+}
+
+.concert-header {
+	text-align: center;
+	color: white;
+	font-size: 30px;
 }
 
 .new-event-button {
@@ -161,5 +171,44 @@ table, th, td {
 	margin-top: 25px;
 	font-size: 15px;
 	text-align: center;
+}
+
+.add-new-event {
+	background-color: #F5B041;
+	text-align: center;
+	height: 40px;
+	width: 140px;
+	border: 1px solid black;
+	font-size: 15px;
+	margin-bottom: 15px;
+}
+
+.big-event-container {
+	background-color: #B2BABB;
+	text-align: center;
+	border: 1px solid black;
+	width: 60%;
+	margin: auto;
+}
+
+.search-results {
+	text-align: center;
+}
+
+.search-link {
+	cursor: pointer;
+}
+
+.event-link, .artist-output {
+	border: 1px solid black;
+	font-size: 20px;
+	margin: 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	cursor: pointer;
+}
+
+.all-artist-caption, .event-name {
+	text-decoration: underline;
 }
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const passport = require('passport')
+const passport = require('passport');
 
 const {User} = require('../models/users');
 
@@ -56,7 +56,7 @@ userRouter.post('/', (req, res) => {
 			min: 1
 		},
 		password: {
-			min: 8,
+			min: 3,
 			max: 72
 		}
 	};
@@ -111,13 +111,6 @@ userRouter.post('/', (req, res) => {
 			else {
 				return res.redirect('/app/login')
 			}
-			// return User
-			// 	.create({
-			// 		username,
-			// 		password: hash,
-			// 		firstName,
-			// 		lastName
-			// 	})
 		})
 		.then(user => {
 			return res.redirect('/app/login')
@@ -137,6 +130,11 @@ userRouter.post('/', (req, res) => {
 			res.status(500).json({code: 500, message: 'Internal server error'});
 		});
 });
+
+userRouter.get('/logout', (req, res) => {
+	req.logout();
+  	res.redirect('/app');
+})
 
 module.exports = {userRouter}
 

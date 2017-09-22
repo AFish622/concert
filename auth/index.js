@@ -12,6 +12,9 @@ const {JWT_SECRET} = require('../config');
 const authRouter = express.Router();
 
 const basicStrategy = new BasicStrategy((username, password, callback) => {
+
+	console.log("Strategy", username, password)
+
 	let user;
 	User
 		.findOne({username: username})
@@ -62,9 +65,16 @@ const createAuthToken = user => {
 	});
 }
 
+const reqUser = (req, res, next) => {
+	console.log('reqUser', req.user)
+	next()
+}
+
 authRouter.post('/login', 
+	reqUser,
 	passport.authenticate('basic', {session: false}),
 	(req, res) => {
+		console.log('reqUser below', req.user)
 		const authToken = createAuthToken(req.user.apiRepr());
 		res.json({authToken})
 	}

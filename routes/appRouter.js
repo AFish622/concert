@@ -27,7 +27,6 @@ appRouter.get('/myEvents', (req, res) => {
 	res.render('myEvents')
 })
 
-
 module.exports = {appRouter}
 
 

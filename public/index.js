@@ -1,156 +1,211 @@
-const event-table = `<table>
-						<caption>My Events</caption>
-						<tr clss="table-header">
-							<th>Event</th>
-							<th>Date</th>
-							<th>Location</th>
-						</tr>
-								
-						<tbody>
-							</tr>
-								<td>Flume</td>
-								<td>10/10/10</td>
-								<td>Bill Graham, San Francisco CA</td>
-							</tr>
-							<tr>
-								<td>Skrillex</td>
-								<td>11/11/11</td>
-								<td>Fox Theatre, Oakland CA</td>
-							</tr>
-							<tr>
-								<td>Coachella Valley Music Festical</td>
-								<td>12/12/12</td>
-								<td>Indio, CA</td>
+const mainTemplate = `<table>
+						<caption>Events</caption>	
+						<tbody class="myTable">
+							</tr class="row-event">
+								<th class="table-artist"></td>
+								<td class="table-events"></td>
 							</tr>
 						</tbody>
 					</table>`
 
-//upcoming events search
-//http://api.songkick.com/api/3.0/events.json?apikey=y6tnZdtdNsMK4JG3&artist_name=lorde
-
-//search by artist
-//http://api.songkick.com/api/3.0/search/artists.json?query=flume&apikey=y6tnZdtdNsMK4JG3
-
-//search by id
-//http://api.songkick.com/api/3.0/artists/68043/calendar.json?apikey=y6tnZdtdNsMK4JG3
-
-//search by music brainz id
-//http://api.songkick.com/api/3.0/artists/mbid:35fd8d42-b4a6-4414-9827-8766bd0daa3c/calendar.json?apikey=y6tnZdtdNsMK4JG3
-
-//search by venue
-//http://api.songkick.com/api/3.0/search/venues.json?query=bill_graham&apikey=y6tnZdtdNsMK4JG3
-
-//search by similar artist
-//http://api.songkick.com/api/3.0/artists/68043/similar_artists.json?apikey=y6tnZdtdNsMK4JG3
-
-//search by past events
-//http://api.songkick.com/api/3.0/artists/3084961/gigography.json?apikey=y6tnZdtdNsMK4JG3
-
-//search by location name
-//http://api.songkick.com/api/3.0/search/locations.json?query=san_francisco&apikey=y6tnZdtdNsMK4JG3
-
-//search by location lat and long
-//http://api.songkick.com/api/3.0/search/locations.json?location=geo:37.7599,-122.437&apikey=y6tnZdtdNsMK4JG3
-
-//Data to be displayed during initial search
-// eventDetails: 
-// 	location
-// 	displayName
-// 	date
-// 	venue
-	
-//Data to be displayed during specific event
-//Artist Name
-//Event details
-//youtube clip
-//related artist
+const eventTemplate = `<div class="big-event-container">
+						<div>
+							<h1 class="event-name"></h1>
+							<p class="event-venue">Venue: </p>
+							<p class="event-date">Date: </p>
+							<p class="event-address">Address: </p>
+							<h2 class="all-artist-caption">All performing Artist</h2>
+							<p class="event-performers"></p>
+							<form action="/api/concert" method="get">
+								<input class="add-new-event" type="submit" value="Add to my Events">
+							</form>
+						</div>
+					</div>`
 
 
-const getArtistData = function(endpoint, query) {
-	const key = '&apikey=y6tnZdtdNsMK4JG3';
-	$.getJSON("http://api.songkick.com/api/3.0/search/" + endpoint + query + key,
-		function (data) {
-			console.log(data);
-			if (data.resultsPage.totalEntries === 0) {
-				alert('No results found')
+const getArtistData = function(query) {
+	$('.concert-header').text('Artist');
+	$.getJSON("/songkick/" + query, function (data) {
+			console.log('FIRST CALL DATA', data);
+			if (data.err) {
+				$('.search-results').append('<p>' + data.err + '</p>');
 			}
-			for (let i = 0; i < data.resultsPage.results.artist.length; i++) {
-				let artist = data.resultsPage.results.artist[i].displayName;
-				let touring = data.resultsPage.results.artist[i].onTourUntil = 'null' ? ' Currently not on tour ' : ' Currently Touring ' + data.resultsPage.results.artist[i].onTourUntil;
-				let artistId = data.resultsPage.results.artist[i].id;
-				$('.search-results').append('<div class="little-container"><p><a class="chosen-link" href=#>' + artist + '</a>' + touring +'</p><p class="artist-id hidden">' + artistId + '</p></div>' )
+
+			else {
+				const appendArtist = data.map(artist => {
+					
+					return !artist.onTourUntil 
+						? `<p class="artist-output">
+								${artist.displayName}:
+								<span style="color:red"> Currently not on tour </span>
+						   </p>`
+						: `<p class="search-link artist-output" data-artist-id=${artist.id}>
+								${artist.displayName}:
+								<span class="search-link" data-artist-id=${artist.id} style="color:blue"> Currently Touring until ${artist.onTourUntil}</span>
+						   </p>`
+
+				})
+
+				$('.search-results').append(appendArtist);
 			}
-		
+	});
+} 
+
+
+const getUpcomingData = function(id) {
+	$('.concert-header').text('Events');
+	$.getJSON("/songkick/id/" + id, function(data) {
+			console.log("SECOND DATA", data);
+			$('.search-results').html('<p></p>');
+			const appendEvent = data.map(events => {
+				return `<p class="event-link" data-event-id=${events.id}>${events.displayName}</p>`
+			});
+			$('.search-results').append(appendEvent);
 	});
 }
 
-const getUpcomingData = function(name) {
-	$.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y6tnZdtdNsMK4JG3&artist_name=" + name,
-		function(data) {
-			console.log("UPCOMING", data)
-			$('.search-results').text('');
-			if (data.resultsPage.totalEntries === 0) {
-				alert('No results found')
-			}
-			for (let i = 0; i < data.resultsPage.results.event.length; i++) {
-				const concertName = data.resultsPage.results.event[i].displayName;
-				const concertType = data.resultsPage.results.event[i].type;
-				$('.search-results').append('<div class="little-container"><p class="concert-link"><a href=#>' + concertName + ' (' + concertType + ') ' + '</a></p></div>');
-			}
-			
-		});
+const eventDetails = function(event) {
+	let $template = $(eventTemplate);
+	$('.concert-header').text('Event Details');
+	$('.search-results').addClass('hidden');
+	$.getJSON("/songkick/event/" + event, function(data) {
+		console.log("EVENT DATA", data);
+		let eventName = data.displayName;
+		let eventVenue = data.venue.displayName;
+		let eventCity = data.location.city;
+		let eventStreet = data.venue.street;
+		let eventZip = data.venue.zip;
+		let eventAddress = eventStreet + ' ' + eventCity + ' ' + eventZip;
+		let eventStart = data.start.date;
+		let eventTime = data.start.time;
+		let dateTime = eventStart + ' ' + eventTime;
+		for (let i = 0; i < data.performance.length; i++) {
+			let eventArtist = data.performance[i].displayName + ',  ';
+			$template.find('.event-performers').append(eventArtist);
+		}
+		// $('.event-name').append(eventName);
+		// $('.event-venue').append(eventVenue);
+		// $('.event-date').append(dateTime);
+		// $('.event-address').append(eventAddress);
+		// $('.big-event-container').show();
+		// $('.add-new-event').show().append('<p data-for-event="' + eventName + dateTime + '"</p>');
+		$template.find('.event-name').append(eventName).attr('data-event-name', eventName);
+		$template.find('.event-venue').append(eventVenue);
+		$template.find('.event-date').append(dateTime).attr('data-date-time', dateTime);
+		$template.find('.event-address').append(eventAddress);
+		$('.append-event').append($template);
+	})
 }
 
-var searchRequest = function() {
+var searchQuery = function() {
 	$('.main-form').submit(function(event) {
 		event.preventDefault();
-		const endpoint = 'artists.json?query=';
 		const query = $('.main-search').val();
+		// const queryType = $('select').find(':selected').val();
+		// const endpoint = queryType == 'concerts' ? getArtistData(query) : getVenueData(query);
 		$('.main-search').val('');
 		$('.results-container').removeClass('hidden');
-		$('.search-results').html('');
-		getArtistData(endpoint, query);
+		$('.search-results').text('')
+		getArtistData(query);
 	})
 }
 
-var renderArtistLinks = function() {
-	$('body').on('click', '.chosen-link', function(event) {
-	event.preventDefault();
-	let singleId = $('.little-container').find('.chosen-link').html();
-	console.log(singleId)
-	getUpcomingData(singleId);
-	})
-}
-
-var renderIndividualShow = function() {
-	$('body').on('click', 'concert-link', function(event) {
+var clickOnArtist = function() {
+	$('body').on('click', '.search-link', function(event) {
 		event.preventDefault();
-		let singleConcert = $('.little-container').find('.concert-link').html();
-		console.log(singleConcert);
+		const artistById = ($(event.target).attr('data-artist-id'));
+		console.log("ID", artistById)
+		getUpcomingData(artistById);
+	})
+}
+
+var clickOnEvent = function() {
+	$('body').on('click', '.event-link', function(event) {
+		event.preventDefault();
+		let singleEventId = $(event.target).attr('data-event-id');
+		eventDetails(singleEventId);
+		console.log(singleEventId);
 	} )
 }
 
-var clickOnNewEvent = function() {
-	$('.new-event-button').on('click', function() {
-		event.preventDefault()
-		$('.my-events').addClass('hidden');
-		$('.new-event-container').removeClass('hidden')
+var addNewEvent = function() {
+	console.log('invoked')
+	$('body').on('click', '.add-new-event', function(event) {
+		event.preventDefault();
+		console.log('working')
+		const addEventDetails = $(event.target).attr('data-for-event')
+		// find the id for the event
+		const date = $(event.target).parent().find('.event-date').text()
+		console.log("date", date);
 	})
 }
 
+// var clickOnNewEvent = function() {
+// 	$('body').on('click', '.add-new-event', function(event) {
+// 		event.preventDefault()
+// 		$('.my-events').addClass('hidden');
+// 		$('.new-event-container').removeClass('hidden')
+// 	})
+// }
+
+// $(document).ready(function() {
+// 	getLocation();
+
+// });
+
+// var x = document.getElementById("demo");
+
+// function getLocation() {
+// 	if(navigator.geolocation) {
+// 		navigator.geolocation.getCurrentPosition(showPosition);
+// 	}
+// 	else {
+// 		x.innerHTML = "Geolocation not supported by this browser"
+// 	}
+// }
+
+// function showPosition(position) {
+// 	x.innerHTML = "Latitude: " + position.coords.latitude + 
+// 	"<br>Longitude: " + position.longitude;
+// }
+
+// const getVenueData = function(name) {
+// 	$.getJSON("http://api.songkick.com/api/3.0/search/venues.json?query=" + name + "&apikey=y6tnZdtdNsMK4JG3", function(data) {
+// 		console.log("venue", data);
+// 		for (let i = 0; i < data.resultsPage.results.venue.length; i++) {
+// 			let venueName = data.resultsPage.results.venue[i].displayName;
+// 			let venueStreet = data.resultsPage.results.venue[i].street;
+// 			let venueCity = data.resultsPage.results.venue[i].metroArea.displayName;
+// 			// let venueState = data.resultsPage.results.venue[i].metroArea.state.displayName;
+// 			let venueAddress = venueStreet + ' ' + venueCity;
+// 			$('.myTable').after('<tr><th class="tableArtist">' + venueName + '</th><td>' + venueAddress + '</tr>');
+// 		}
+// 	});
+// }
+
+
 
 $(function() {
-	searchRequest();
-	renderArtistLinks();
-	renderIndividualShow();
-	clickOnNewEvent();
+	searchQuery();
+	clickOnArtist();
+	clickOnEvent();
+	// clickOnNewEvent();
+	addNewEvent();
+	// getGeo();
 })
 
+// const getGeo = function () {
+// 	$.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=1060+Bush+Street,+San+Francisco,+CA&key=AIzaSyAROW-3VQEqRj_dwg8Gmexm7JxWO335gBI", 
+// 	function(data) {
+// 		console.log("GEO", data);
+// 	});
+// }
 
-// else {
-// 				for (let i = 0; i < data.resultsPage.results.venue.length; i++) {
-// 					let venue = data.resultsPage.results.venue[i].displayName;
-// 					let venueId = data.resultsPage.results.venue[i].id;
-// 					$('.search-results').append('<div class="little-container"><p><a class="chosen-link" href=#>' + venue + '</a><p></div>' )
-// 				}
-			// }
+// const youTubeKey = "AIzaSyAROW-3VQEqRj_dwg8Gmexm7JxWO335gBI"
+
+// callApi = function(name) {
+// 	$.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y6tnZdtdNsMK4JG3&artist_name=" + name, function(data) {
+// 		console.log("11111", data)
+// 		console.log(data.resultsPage.results.event.length)
+// 	});
+// }

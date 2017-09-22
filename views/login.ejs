@@ -12,7 +12,7 @@
 	<div id="login-container">
 		<h1>Log in</h1>
 
-		<form class="signup-form" action="/api/protected/concert" method="get">
+		<form class="signup-form" action="/api/auth/login" method="post">
 			<input type="text" class="username-input" placeholder="username" name="username" required>
 			<input type="text" class="password-input" placeholder="password" name="password" required>
 			<input type="submit" class="signup-submit">
@@ -20,9 +20,9 @@
 		</form>
 
 		<% console.log("message", message) %>
-	<% if (message.message) { %>
-		<p class="login-message"><%= message.message[0] %></p>
-	<% } %>
+		<% if (message.message) { %>
+			<p class="login-message"><%= message.message[0] %></p>
+		<% } %>
 	</div>
 
 </body>
