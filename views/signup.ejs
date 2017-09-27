@@ -5,22 +5,25 @@
 	<link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body class="main-body">
-<header>
-<% include ./partials/head %>
-</header>
+	<header>
+		<% include ./partials/head %>
+	</header>
 
-		<div id="signup-container">
-			<h1>Sign up</h1>
-			<form class="signup-form" action="/api/users/" method="post">
-				<input type="text" class="username-input" placeholder="Username" name="username" value="user"required>
-				<input type="text" class="password-input" placeholder="Password" name="password" required>
-				<input type="text" class="firstname-input" placeholder="First name" name="firstName" value="Austin">
-				<input type="text" class="lastname-input" placeholder="Last name" name="lastName" value="Fish">
-				<input type="submit" class="signup-submit" value="Create Account">
-			</form>
-			</p><a class="account-link" href="#">Already have an account?</a></p>
-		</div>
+	<h2 class="sign-up-header">Sign up for access to events and concert information</h2>
+
+	<div id="signup-container">
+		<h1>Sign up</h1>
+		<form class="signup-form" action="/users/" method="post">
+			<input type="text" class="username-input" placeholder="Username" name="username" value="user"required>
+			<input type="text" class="password-input" placeholder="Password" name="password" required>
+			<input type="text" class="firstname-input" placeholder="First name" name="firstName" value="Austin">
+			<input type="text" class="lastname-input" placeholder="Last name" name="lastName" value="Fish">
+			<input type="submit" class="signup-submit" value="Create Account">
+		</form>
+		</p><a class="account-link" href="/app/login">Already have an account?</a></p>
+	</div>
 
 
 </body>
 </html>
+

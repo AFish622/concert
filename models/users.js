@@ -20,8 +20,22 @@ const UserSchema = mongoose.Schema({
 	lastName : {
 		type: String,
 		default: ""
-	}
+	},
+	events: [{
+		type: String,
+		default: ""
+	}]
 });
+
+const eventSchema = mongoose.Schema({
+	name: String,
+	date: Date,
+	user: {
+    	type: mongoose.Schema.ObjectId,
+    	ref: 'User',
+    	required: true
+  	}
+})
 
 UserSchema.methods.apiRepr = function() {
 	return {
@@ -56,5 +70,6 @@ UserSchema.pre('save', function(next) {
 });
 
 const User = mongoose.model('User', UserSchema);
+const Events = mongoose.model('Events', eventSchema);
 
-module.exports = {User};
+module.exports = {User, Events};

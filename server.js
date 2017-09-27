@@ -13,8 +13,9 @@ const session = require('express-session');
 const {PORT, DATABASE_URL} = require('./config');
 const {userRouter} = require('./routes/userRouter');
 const {appRouter} = require('./routes/appRouter');
-const {authRouter, basicStrategy, jwtStrategy} = require('./auth/index');
+const {authRouter, basicStrategy, jwtStrategy} = require('./routes/authRouter');
 const {songRouter} = require('./routes/songRouter');
+const {eventRouter} = require('./routes/eventRouter')
 
 mongoose.Promise = global.Promise;
 
@@ -28,23 +29,23 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(express.static(__dirname + '/public'));
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-
-app.use(passport.initialize());
-passport.use(basicStrategy);
-passport.use(jwtStrategy);
-app.use(express.static(__dirname + '/public'));
-app.use(morgan('common'));
-app.set('view engine', 'ejs');
-app.use(cookieParser());
 app.use(session({
   secret: 'keyboard cat',
   saveUninitialized: true,
   resave: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(basicStrategy);
+passport.use(jwtStrategy);
+app.use(morgan('common'));
+app.set('view engine', 'ejs');
 
 
 app.use(flash());
@@ -53,11 +54,11 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/api/users/', userRouter);
-app.use('/api/auth/', authRouter);
-app.use('/app/', appRouter);
-app.use('/api/protected', appRouter)
-app.use('/songkick/', songRouter);
+app.use('/users', userRouter);
+app.use('/auth', authRouter);
+app.use('/app', appRouter);
+app.use('/songkick', songRouter);
+app.use('/myevents', eventRouter)
 
 app.get('/api/protected',
 	passport.authenticate('jwt', {session: false}),

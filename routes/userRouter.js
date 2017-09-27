@@ -10,9 +10,6 @@ const jsonParser = bodyParser.json();
 
 userRouter.post('/', (req, res) => {
 
-	console.log("REQ.BODY", req.body)
-
-
 	const requiredFields = ['username', 'password'];
 	const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -106,6 +103,8 @@ userRouter.post('/', (req, res) => {
 				let _user = new User()
 				_user.username = username;
 				_user.password = password;
+				_user.firstName = firstName;
+				_user.lastName = lastName;
 				return _user.save()
 			}
 			else {

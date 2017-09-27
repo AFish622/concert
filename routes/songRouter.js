@@ -23,12 +23,12 @@ songRouter.get('/id/:id', (req, res) => {
 })
 
 songRouter.get('/event/:id', (req, res) => {
-	console.log("REQUEST", req.params.Id)
-	songkickApi.getEventDetails(req.params.Id)
+	console.log("REQUEST", req.params.id)
+	songkickApi.getEventDetails(req.params.id)
 	.then(event => {
 		res.json(event);
 	})
-})
+
 	// .then(artists => {
 	// 	const promises = artists.map(artist => {
 	// 		return new Promise(resolve => {
@@ -52,5 +52,6 @@ songRouter.get('/event/:id', (req, res) => {
 	// })
 
 
+})
 
 module.exports = {songRouter}

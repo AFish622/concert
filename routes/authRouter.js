@@ -11,6 +11,14 @@ const {JWT_SECRET} = require('../config');
 
 const authRouter = express.Router();
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
 const basicStrategy = new BasicStrategy((username, password, callback) => {
 
 	console.log("Strategy", username, password)
@@ -20,7 +28,7 @@ const basicStrategy = new BasicStrategy((username, password, callback) => {
 		.findOne({username: username})
 		.then(_user => {
 			user = _user;
-			console.log("USER", user)
+			console.log("AUTH USER", user)
 			if (!user) {
 				return Promise.reject({
 					reason: 'LoginError',
@@ -65,28 +73,58 @@ const createAuthToken = user => {
 	});
 }
 
-const reqUser = (req, res, next) => {
-	console.log('reqUser', req.user)
-	next()
-}
-
 authRouter.post('/login', 
-	reqUser,
-	passport.authenticate('basic', {session: false}),
+	passport.authenticate('basic', {session: true}),
 	(req, res) => {
-		console.log('reqUser below', req.user)
+		console.log()
 		const authToken = createAuthToken(req.user.apiRepr());
-		res.json({authToken})
+		User.find('SELECT LAST_INSERT_ID() as user_id', function(error, results, fields) {
+			if (error) {
+				throw error; 
+			}
+
+			const user_id = results[0];
+			console.log("AUTH REQUEST USER", req.user);
+			console.log("IS USER VERIFEID?", req.isAuthenticated());
+
+			req.login(user_id, function(err) {
+				res.send({redirect: '/app/concert'});
+			});
+
+			console.log("THE RESULTS", results[0]);
+			// res.render('concert', {user: req.user});
+		})
+		// res.json({authToken})
 	}
 );
 
+authRouter.post('/logout', (req, res) => {
+	req.logout();
+	req.session.destroy(function (err) {
+		res.clearCookie('connect.sid', { path: '/' });
+        res.redirect('../app/login'); //Inside a callback… bulletproof!
+    });
+	// res.redirect('../app/login');
+})
+
 authRouter.post('/refresh', 
-	passport.authenticate('jwt', {session: false}),
+	passport.authenticate('jwt', {session: true}),
 	(req, res) => {
-		console.log("user", req.user)
+		console.log("REFRESH", req.user)
 		const authToken = createAuthToken(req.user);
 		res.json({authToken})
 	}
 );
+
+passport.serializeUser(function(user_id, done) {
+  done(null, user_id);
+});
+
+passport.deserializeUser(function(user_id, done) { 
+    done(err, user_id);
+});
+
+
+
 
 module.exports = {authRouter, basicStrategy, jwtStrategy};

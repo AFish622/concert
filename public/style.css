@@ -40,13 +40,19 @@ a:-webkit-any-link, {
 	position: absolute;
 	width: 420px;
 	right: 500px;
-	top: 30%;
+	top: 36%;
 	text-align: center;
 	border: 2px solid black;
 	padding-top: 25px;
 	padding-bottom: 25px;
 	background-color: #EBEDEF;
 	/*margin-top: 50px;*/
+}
+
+#landing-header, .sign-up-header {
+	color: white;
+	text-align: center;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .signup-form .username-input, .signup-form .password-input, .signup-form .firstname-input, .signup-form .lastname-input, .signup-form .signup-submit  {
@@ -64,7 +70,7 @@ a:-webkit-any-link, {
 	border: 1px solid black;
 }
 
-.signup-form .signup-submit, {
+.signup-form .signup-submit {
 	height: 40px;
 	width: 200px;
 	position: relative;
@@ -100,6 +106,7 @@ a:-webkit-any-link, {
 	text-align: center;
 	font-size: 70px;
 	color: white;
+	text-shadow: -1px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
 }
 
 .main-body {
@@ -148,6 +155,11 @@ a:-webkit-any-link, {
 .login-message, .event-name {
 	text-align: center;
 	color: red;
+	/*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+}
+
+.event-name {
+	font-size: 44px;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
@@ -212,3 +224,48 @@ a:-webkit-any-link, {
 	text-decoration: underline;
 }
 
+.event-table {
+	background-color: gray;
+}
+
+.welcome-user {
+	color: white;
+	text-align: center;
+	font-size: 25px;
+}
+
+.landing-container {
+	color: white;
+	text-align: center;
+	margin: auto;
+	font-family: 'Crete Round', serif;
+}
+
+.landing-list {
+	list-style-position: inside;
+	font-size: 35px;
+}
+
+.landing-header {
+	font-size: 63px;
+}
+
+.landing-title {
+	font-size: 45px
+
+}
+
+.landing-signup, .landing-login {
+	height: 70px;
+	width: 175px;
+	margin-right: 35px;
+	background-color: #F5B041;
+	border-radius: 10px;
+	font-size: 25px
+}
+
+.landing-inputs {
+	position: relative;
+	left: 36%;
+	border-radius: 25px
+}

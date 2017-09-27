@@ -1,27 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<title>Concert Tracker</title>
-	<link rel="stylesheet" type="text/css" href="index.css">
-</head>
-<body>
-<div>
-	<p>Create Account</p>
-	<div class="login-input">
-		<input type="text" class="username-input" placeholder="username" required>
-		<input type="text" class="password-input" placeholder="password" required>
-		<input type="text" placeholder="first name">
-		<input type="text" placeholder="last name">
-		<input type="submit" placeholder="submit">
-	</div>
+	<link rel="stylesheet" type="text/css" href="style.css">
 
-<script
+	<link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
+
+	<script
   		src="https://code.jquery.com/jquery-3.2.1.min.js"
   		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   		crossorigin="anonymous">
-</script>
+	</script>
 
 
-  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="../index.js"></script>
+
+	<title>Landing Page</title>
+</head>
+
+<body class="main-body">
+	<h1 class="concert-header landing-header">Concert Calendar</h1>
+
+	<div class="landing-container">
+		<h2 class="landing-title">Don't Miss Another Show!</h2>
+		<ul class="landing-list">
+			<li> An oragnized, fun way to track your favorite concerts and festivals</li>
+			<li>Search for your favorite artist and never miss another show</li>
+			<li>Create a personalized calendar to keep track of your events</li>
+			<li>Follow your favorite artist on tour</li>
+		</ul>
+	</div>
+
+	<div class="landing-inputs">
+		<input type="submit" value="Sign up" class="landing-signup">
+		<input type="submit" value="Log in" class="landing-login">
+	</div>
 </body>
 </html>

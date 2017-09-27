@@ -2,13 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport')
 
-const {User} = require('../models/users');
+const {User, Events} = require('../models/users');
 
 const appRouter = express.Router();
 const jsonParser = bodyParser.json();
 
 appRouter.get('/', (req, res) => {
-	res.render('index')
+	res.render('signup')
 });
 
 appRouter.get('/login', (req, res) => {
@@ -16,16 +16,46 @@ appRouter.get('/login', (req, res) => {
 });
 
 appRouter.get('/signup', (req, res) => {
-	res.render('signup')
+	res.render('signup') //put user inside//
 });
 
-appRouter.get('/concert', (req, res) => {
-	res.render('concert')
+appRouter.get('/concert', isLoggedIn(), (req, res) => {
+	console.log("REQ.USER", req.user)
+	res.render('concert', {user: req.user});
 });
 
-appRouter.get('/myEvents', (req, res) => {
-	res.render('myEvents')
-})
+// Events.create({
+// 	user: '59c95ae98d6c981929223230',
+// 	name: 'Cool Show',
+// 	date: Date.now()
+// })
+// Events.find({user: '59c95ae98d6c981929223230'})
+// .populate('user')
+// .then(data => {
+// 	console.log(data, 'Events')
+// })
+// User.find()
+// .then(data => {
+// 	console.log(data, 'User')
+// })
+
+
+appRouter.get('/myevents', isLoggedIn(), (req, res) => {	
+	User.findOne({_id: req.user._id})
+		.then(user => {
+			console.log("My Events", user)
+			res.render('myEvents', {user})
+		})
+});
+
+function isLoggedIn () {  
+	return (req, res, next) => {
+		console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+
+	    if (req.isAuthenticated()) return next();
+	    res.redirect('/app/login')
+	}
+}
 
 module.exports = {appRouter}
 
