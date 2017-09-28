@@ -20,6 +20,7 @@ const eventTemplate = `<div class="big-event-container">
 							<p class="event-performers"></p>
 							<form>
 								<input type="hidden" class="myEventId" name="eventId" value="">
+								<input type="hidden" class="myEventArtist" name="mainArtist" value="">
 								<input type="hidden" class="myEventName" name="eventName" value="">
 								<input type="hidden" class="myEventTime" name="eventTime" value="">
 								<input class="add-new-event" type="submit" value="Add to my Events">
@@ -86,6 +87,7 @@ const eventDetails = function(event) {
 		let eventStart = data.start.date;
 		let eventTime = data.start.time;
 		let dateTime = eventStart + ' ' + eventTime;
+		let mainArtist = data.performance[0].displayName;
 		for (let i = 0; i < data.performance.length; i++) {
 			let eventArtist = data.performance[i].displayName + ',  ';
 			$template.find('.event-performers').append(eventArtist);
@@ -95,6 +97,7 @@ const eventDetails = function(event) {
 		$template.find('.event-date').append(dateTime).attr('data-date-time', dateTime);
 		$template.find('.event-address').append(eventAddress);
 		$template.find('.myEventId').val(eventId);
+		$template.find('.myEventArtist').val(mainArtist);
 		$template.find('.myEventName').val(eventVenue);
 		$template.find('.myEventTime').val(dateTime);
 		// $template.find('.event-address').val(eventAddress);
@@ -136,17 +139,19 @@ const clickOnEvent = function() {
 const addNewEvent = function() {
 		$('body').on('click', '.add-new-event', function(event) {
 			event.preventDefault();
+			const addMainArtist = $('.myEventArtist').val();
 			const addEventName = $('.myEventName').val();
 			const addEventTime = $('.myEventTime').val();
 			const addEventId = $('.myEventId').val();
-			console.log("recieved id", addEventId);
+			console.log("recieved id", addMainArtist);
 				$.ajax({
 					url: "/myevents",
 					method: "POST",
 				    data: {
+				    	addArtist: addMainArtist,
 				    	addName: addEventName,
 				    	addTime: addEventTime,
-				    	addId: addEventId,
+				    	addId: addEventId
 				    },
 				})
 				.done(data => {

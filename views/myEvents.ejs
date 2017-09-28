@@ -19,26 +19,26 @@
 	<div>
 	<p class="append-new-event"></p>
 	</div>
-	<p class="welcome-user"> Welcome <%= user.firstName %></p>
+	<p class="welcome-user"><%= user.firstName %>'s Events</p>
 	
-		<ul>
-		<% for(var i=0; i<user.events.length; i++) {%>
-		   <li><%= user.events[i] %></li>
-		<% } %>
-		<% console.log('heheeh', JSON.stringify(user, null, '\t')) %>
-		</ul>
 
 
 	<table class="event-table">
 			<caption>Events</caption>	
 			<tr>
 				<th>Artist</th>
+				<th>Location</th>
 				<th>Date</th>
 			</tr>
-			<tr>
-				<td class="table-artist"></td>
-				<td class="table-date"></td>
-			</tr>
+				
+			<% for(var i=0; i<user.events.length; i++) {%>
+				<tr>
+		   			<td><%= user.events[i] %></td>
+		   		</tr>
+			<% } %>
+			
+			
+
 	</table>
 	<!-- <div class="my-events-table"> -->
 	<!-- 	<table class="event-container">
