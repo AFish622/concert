@@ -22,19 +22,22 @@ const UserSchema = mongoose.Schema({
 		default: ""
 	},
 	events: [{
-		type: String,
-		default: ""
+		artist: String,
+		event: String,
+		date: Date
 	}]
 });
 
 const eventSchema = mongoose.Schema({
-	name: String,
-	date: Date,
-	user: {
-    	type: mongoose.Schema.ObjectId,
-    	ref: 'User',
-    	required: true
-  	}
+	// eventID: Number,
+	eventName: String,
+	// artist: String,
+	// date: Date,
+	// user: {
+ //    	type: mongoose.Schema.ObjectId,
+ //    	ref: 'User',
+ //    	required: true
+ //  	}
 })
 
 UserSchema.methods.apiRepr = function() {
@@ -70,6 +73,6 @@ UserSchema.pre('save', function(next) {
 });
 
 const User = mongoose.model('User', UserSchema);
-const Events = mongoose.model('Events', eventSchema);
+const Event = mongoose.model('Event', eventSchema);
 
-module.exports = {User, Events};
+module.exports = {User, Event};

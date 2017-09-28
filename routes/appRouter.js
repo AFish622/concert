@@ -20,8 +20,7 @@ appRouter.get('/signup', (req, res) => {
 });
 
 appRouter.get('/concert', isLoggedIn(), (req, res) => {
-	console.log("REQ.USER", req.user)
-	res.render('concert', {user: req.user});
+		res.render('concert', {user: req.user});
 });
 
 // Events.create({

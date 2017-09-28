@@ -27,19 +27,21 @@
 			<caption>Events</caption>	
 			<tr>
 				<th>Artist</th>
-				<th>Location</th>
+				<th>Venue</th>
 				<th>Date</th>
+				<th>Link</th>
 			</tr>
 				
 			<% for(var i=0; i<user.events.length; i++) {%>
 				<tr>
-		   			<td><%= user.events[i] %></td>
+		   			<td><%= user.events[i].artist %></td>
+		   			<td><%= user.events[i].event %></td>
+		   			<td><%= user.events[i].date %></td>
+		   			<td>Link Goes Here</td>
 		   		</tr>
 			<% } %>
-			
-			
-
 	</table>
+
 	<!-- <div class="my-events-table"> -->
 	<!-- 	<table class="event-container">
 			<caption class="event-caption">My Events</caption>

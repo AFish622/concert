@@ -224,8 +224,15 @@ a:-webkit-any-link, {
 	text-decoration: underline;
 }
 
-.event-table {
+table, th, td {
 	background-color: gray;
+	margin: 0 auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 15px;
 }
 
 .welcome-user {

@@ -151,7 +151,7 @@ const addNewEvent = function() {
 				    	addArtist: addMainArtist,
 				    	addName: addEventName,
 				    	addTime: addEventTime,
-				    	addId: addEventId
+				    	addId: addEventId,
 				    },
 				})
 				.done(data => {
