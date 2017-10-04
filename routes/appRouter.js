@@ -16,7 +16,7 @@ appRouter.get('/login', (req, res) => {
 });
 
 appRouter.get('/signup', (req, res) => {
-	res.render('signup') //put user inside//
+	res.render('signup') 
 });
 
 appRouter.get('/concert', isLoggedIn(), (req, res) => {
@@ -42,10 +42,14 @@ appRouter.get('/concert', isLoggedIn(), (req, res) => {
 appRouter.get('/myevents', isLoggedIn(), (req, res) => {	
 	User.findOne({_id: req.user._id})
 		.then(user => {
-			console.log("My Events", user)
 			res.render('myEvents', {user})
 		})
 });
+
+
+appRouter.get('/addEvent', (req, res) => {
+	res.render('addEvent')
+})
 
 function isLoggedIn () {  
 	return (req, res, next) => {

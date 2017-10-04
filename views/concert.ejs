@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title></title>
+	<title>Concert Calendar</title>
+
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
+
 	<link rel="stylesheet" type="text/css" href="/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
+
+
 </head>
 <body class="main-body">
 <header>
@@ -17,35 +25,9 @@
 	</div>
 
 	<div class="append-event"></div>
-		<!-- <table class="main-table">	
-						<tbody class="myTable">
-							</tr class="row-event">
-								<th class="table-artist"></td>
-								<td class="table-events"></td>
-							</tr>
-						</tbody>
-					</table> -->
-	
 
-	<!-- <div class="big-event-container hidden">
-		<div>
-			<h1 class="event-name"></h1>
-			<p class="event-venue">Venue: </p>
-			<p class="event-date">Date: </p>
-			<p class="event-address">Address: </p>
-			<h2 class="all-artist-caption">All performing Artist</h2>
-			<p class="event-performers"></p>
-			<input class="add-new-event hidden" type="submit" value="Add to my Events">
-		</div>
-	</div> -->
-	
-	<script
-  		src="https://code.jquery.com/jquery-3.2.1.min.js"
-  		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  		crossorigin="anonymous">
-	</script>
+	<div class="back-container hidden">
+		<input type="button" class="go-back-data" value="Back">
+	</div>
 
-
-	<script type="text/javascript" src="/index.js"></script>
-</body>
-</html>
+	<footer> <% include ./partials/footer %> </footer>

@@ -22,9 +22,12 @@ const UserSchema = mongoose.Schema({
 		default: ""
 	},
 	events: [{
-		artist: String,
+		eventId: Number,
 		event: String,
-		date: Date
+		venue: String,
+		date: Date,
+		artist: String,
+		location: String
 	}]
 });
 

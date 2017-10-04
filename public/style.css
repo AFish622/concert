@@ -1,27 +1,32 @@
-
-.nav-content li { 
-	color: white !important;
-	list-style-type: none;
-	display: inline;
-	text-align: center;
+* {
+	font-family: 'Crete Round', serif;
 }
-
 .account-link {
 	color: black;
 }
 
-a:-webkit-any-link, {
-	color: white;
-	text-align: center;
-}
-
-#logout-link {
+input#logout-link {
 	float: right;
 	padding-right: 35px;
+	padding-left: 35px;
+	margin-right: 75px;
 }
 
-#my-events-link {
+input#my-events-link {
 	float: left;
+	padding-left: 35px;
+	padding-right: 35px;
+	margin-left: 75px;
+}
+
+input#my-events-link, input#logout-link {
+	height: 40px;
+	background-color: white;
+	border-radius: 10px;
+	margin-top: 15px;
+	background-color: #F5B041;
+	border: 1px solid black;
+	font-size: 18px;
 }
 
 .nav-bar {
@@ -55,22 +60,22 @@ a:-webkit-any-link, {
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.signup-form .username-input, .signup-form .password-input, .signup-form .firstname-input, .signup-form .lastname-input, .signup-form .signup-submit  {
+.signup-form .username-input, .signup-form .password-input, .signup-form .firstname-input, .signup-form .lastname-input, .signup-form .signup-submit, .event-input, .venue-input, .date-input, .artist-input, .add-event-submit, .venue-location {
 	display: block;
 	width: 400px;
 	height: 40px;
-	font-size: 25px;
+	font-size: 20px;
 	margin-bottom: 10px;
 	text-align: center;
 }
 
-.signup-form .username-input, .signup-form .password-input, .signup-form .firstname-input, .signup-form .lastname-input {
+.signup-form .username-input, .signup-form .password-input, .signup-form .firstname-input, .signup-form .lastname-input, .event-input, .venue-input, .date-input, .artist-input, .venue-location {
 	width: 75%;
 	margin-left: 50px;
 	border: 1px solid black;
 }
 
-.signup-form .signup-submit {
+.signup-form .signup-submit, .add-event-submit {
 	height: 40px;
 	width: 200px;
 	position: relative;
@@ -87,6 +92,7 @@ a:-webkit-any-link, {
 	width: 450px;
 	height: 40px;
 	font-size: 25px;
+	margin-top: 13px;
 	/*position: relative;*/
 	/*top: 150px;*/
 	border: 1px solid black;
@@ -177,15 +183,17 @@ a:-webkit-any-link, {
 .new-event-button {
 	background-color: #F5B041;
 	position: relative;
-	left: 648px;
+	left: 630px;
 	width: 120px;
 	height: 40px;
 	margin-top: 25px;
 	font-size: 15px;
 	text-align: center;
+	width: 150px;
+	margin-bottom: 50px;
 }
 
-.add-new-event {
+.add-new-event, .go-back-data {
 	background-color: #F5B041;
 	text-align: center;
 	height: 40px;
@@ -193,6 +201,10 @@ a:-webkit-any-link, {
 	border: 1px solid black;
 	font-size: 15px;
 	margin-bottom: 15px;
+}
+
+.back-container {
+	text-align: center;
 }
 
 .big-event-container {
@@ -225,7 +237,7 @@ a:-webkit-any-link, {
 }
 
 table, th, td {
-	background-color: gray;
+	background-color: #B2BABB;
 	margin: 0 auto;
 	border: 1px solid black;
 	border-collapse: collapse;
@@ -233,6 +245,12 @@ table, th, td {
 
 th, td {
 	padding: 15px;
+}
+
+td.myEventsLink, td.delete-event {
+	color: purple;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .welcome-user {
@@ -245,7 +263,6 @@ th, td {
 	color: white;
 	text-align: center;
 	margin: auto;
-	font-family: 'Crete Round', serif;
 }
 
 .landing-list {
@@ -275,4 +292,24 @@ th, td {
 	position: relative;
 	left: 36%;
 	border-radius: 25px
+}
+
+.event-notice, .notification {
+	color: red;
+}
+
+.go-back {
+	background-color: #F5B041;
+	height: 40px;
+	width: 100px;
+	font-size: 15px;
+	border: 1px solid black;
+	position: relative;
+	left: 46%;
+	top: 600px;
+}
+
+.button-caption {
+	color: white;
+	text-align: center;
 }

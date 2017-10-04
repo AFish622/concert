@@ -1,21 +1,17 @@
 
 	<div class="nav-bar" role="navigation">
-		<ul class="nav-content">
-			<li id="my-events-link"><a href="/app/myevents">My Events</a></li>
-			<!-- <li class="Title">Concert Calendar</li> -->
-			<li id="logout-link">
-				<form method="POST" action="/auth/logout">
-					<input type="submit" name="main-submit" value="Logout">
-				</form>
-			</li>
-		</ul>
+		<form method="GET" action="/app/myevents">
+			<input type="submit" id="my-events-link" value="My Events">
+		</form>
+
+		
+		<form  method="POST" action="/auth/logout">
+			<input type="submit" id="logout-link" value="Logout">
+		</form>
+		
 		<div class="main-form">
 			<form class="main-input" action="app/concert">
 				<input class="main-search" type="text" name="search-concerts" placeholder="Search by artist or keyword" autofocus>
-				<!-- <select>
-					<option value="concerts">Concerts</option>
-					<option value="venues">Venues</option>
-				</select> -->
 				<input class="main-submit" type="submit" name="main-submit" value="Search">
 			</form>
 		</div>
