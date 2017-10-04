@@ -46,11 +46,34 @@ eventRouter.get('/', (req, res) => {
 });
 
 eventRouter.get('/:id', (req, res) => {
-	const customEvent = req.user.events.filter(event => {
-		return event._id == req.params.id
-	}) [0]
-	res.send({customEvent})
+	console.log('coming in', req.user)
+	User.findOne({_id: req.user._id})
+	.then(user => {
+		const customEvent = user.events.filter(event => {
+			return event._id == req.params.id
+		})[0]
+
+		res.send({customEvent})
+	})
+	
 });
+
+eventRouter.get('/:id/registered', (req, res) => {
+	User.findOne({_id: req.user._id})
+		.then(user => {
+			let userEvents = user.events.map(event => {
+				return event.eventId;
+			})
+			// console.log("XXX", userEvents);
+			res.json({eventIds: userEvents})
+			// if (userEvents = req.params) {
+			// 	res.json({True: 'True'})
+			// }
+			// else {
+			// 	res.json({False: 'False'})
+			// }
+		})
+})
 
 function isLoggedIn () {  
 	return (req, res, next) => {

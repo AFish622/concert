@@ -120,18 +120,9 @@ input#my-events-link, input#logout-link {
     background-size: 100% 890px;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    width: 100%;
 }
 
-/*.results-container {
-	position: relative;
-	left: 350px;
-	top: 50px;
-	width: 50%;
-	background-color: #B2BABB;
-	border: 1px solid black;
-	text-align: center;
-}
-*/
 
 .results-container {
 	background-color: #B2BABB;
@@ -182,18 +173,14 @@ input#my-events-link, input#logout-link {
 
 .new-event-button {
 	background-color: #F5B041;
-	position: relative;
-	left: 630px;
-	width: 120px;
-	height: 40px;
-	margin-top: 25px;
-	font-size: 15px;
-	text-align: center;
 	width: 150px;
+	height: 40px;
+	font-size: 15px;
 	margin-bottom: 50px;
+	border: 1px solid black;
 }
 
-.add-new-event, .go-back-data {
+.add-new-event, .go-back-data, .back-to-events {
 	background-color: #F5B041;
 	text-align: center;
 	height: 40px;
@@ -248,9 +235,16 @@ th, td {
 }
 
 td.myEventsLink, td.delete-event {
-	color: purple;
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+td.myEventsLink {
+	color: red;
+}
+
+td.delete-event {
+	color: blue;
 }
 
 .welcome-user {
@@ -298,7 +292,7 @@ td.myEventsLink, td.delete-event {
 	color: red;
 }
 
-.go-back {
+.search-again {
 	background-color: #F5B041;
 	height: 40px;
 	width: 100px;
@@ -312,4 +306,13 @@ td.myEventsLink, td.delete-event {
 .button-caption {
 	color: white;
 	text-align: center;
+}
+
+.new-button-container {
+	text-align: center;
+}
+
+.event-table {
+	/*margin: 10%;*/
+	width: 80%;
 }

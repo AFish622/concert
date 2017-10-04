@@ -23,7 +23,8 @@ const eventTemplate = `<div class="big-event-container">
 								<input type="hidden" class="myEventShow" name="mainArtist" value="">
 								<input type="hidden" class="myEventVenue" name="eventName" value="">
 								<input type="hidden" class="myEventDate" name="eventTime" value="">
-								<input class="add-new-event" type="submit" value="Add to my Events">
+								<input type="submit" class="add-new-event" value="Add to my Events">
+								<input type="submit" class="back-to-events hidden" value="Add another event"
 							</form>
 							<p class="notification"></p>
 						</div>
@@ -77,32 +78,50 @@ const eventDetails = (event) => {
 	const $template = $(eventTemplate);
 	$('.concert-header').text('Event Details');
 	$('.search-results').addClass('hidden');
-	$.getJSON("/songkick/event/" + event, (data) => {
-		const eventId = data.id;
-		const eventName = data.displayName;
-		const eventVenue = data.venue.displayName;
-		const eventCity = data.location.city;
-		const eventStreet = data.venue.street;
-		const eventZip = data.venue.zip;
-		const eventAddress = eventStreet + ' ' + eventCity + ' ' + eventZip;
-		const eventStart = data.start.date;
-		const eventTime = data.start.time;
-		const dateTime = eventStart + ' ' + eventTime;
-		const mainArtist = data.performance[0].displayName;
-		for (let i = 0; i < data.performance.length; i++) {
-			const eventArtist = data.performance[i].displayName + ',  ';
-			$template.find('.event-performers').append(eventArtist);
-		};
-		$template.find('.event-name').append(eventName).attr('data-event-name', eventName);
-		$template.find('.event-venue').append(eventVenue).attr('data-event-id', eventId);
-		$template.find('.event-date').append(dateTime).attr('data-date-time', dateTime);
-		$template.find('.event-address').append(eventAddress);
-		$template.find('.myEventId').val(eventId);
-		$template.find('.myEventShow').val(eventName);
-		$template.find('.myEventVenue').val(eventVenue);
-		$template.find('.myEventDate').val(dateTime);
-		$('.append-event').append($template);
-	});
+	$.ajax({
+		url: `/myevents/${event}/registered`
+	})
+	.then(eventArr => {
+		console.log("EEEEEE", eventArr)
+		$.getJSON("/songkick/event/" + event, (data) => {
+			console.log("THE DATA", data);
+			const eventId = data.id;
+			const eventName = data.displayName;
+			const eventVenue = data.venue.displayName;
+			const eventCity = data.location.city;
+			const eventStreet = data.venue.street;
+			const eventZip = data.venue.zip;
+			const eventAddress = eventStreet + ' ' + eventCity + ' ' + eventZip;
+			const eventStart = data.start.date;
+			const eventTime = data.start.time;
+			const dateTime = eventStart + ' ' + eventTime;
+			const mainArtist = data.performance[0].displayName;
+			for (let i = 0; i < data.performance.length; i++) {
+				const eventArtist = data.performance[i].displayName + ',  ';
+				$template.find('.event-performers').append(eventArtist);
+			};
+			$template.find('.event-name').append(eventName).attr('data-event-name', eventName);
+			$template.find('.event-venue').append(eventVenue).attr('data-event-id', eventId);
+			$template.find('.event-date').append(dateTime).attr('data-date-time', dateTime);
+			$template.find('.event-address').append(eventAddress);
+			$template.find('.myEventId').val(eventId);
+			$template.find('.myEventShow').val(eventName);
+			$template.find('.myEventVenue').val(eventVenue);
+			$template.find('.myEventDate').val(dateTime);
+			if(eventArr.eventIds.includes(data.id)) {
+				$template.find('.add-new-event').hide();
+				$template.find('.back-to-events').removeClass('hidden');
+				$('.notification').text('Event already added to your events')
+			}
+
+			$('.append-event').append($template);
+		});
+	})
+	.fail(err => {
+		console.log(err);
+	})
+		
+	
 ;}
 
 const customEventDetails = id => {
@@ -133,12 +152,12 @@ const searchQuery = () => {
 		const query = $('.main-search').val();
 		$('.main-search').val('');
 		$('.results-container').show();
-		$('.event-table, .new-event-button, .new-event-container, .big-event-container, .welcome-user').hide();
+		$('.event-table, .new-event-container, .big-event-container, .welcome-user').hide();
 		$('.search-results').text('');
 		$('.search-results').show();
 		getArtistData(query);
-	})
-}
+	});
+};
 
 const clickOnArtist = () => {
 	$('body').on('click', '.search-link', (event) => {
@@ -177,11 +196,9 @@ const addNewEvent = () => {
 				    },
 				})
 				.done(data => {
-					// window.location.replace('/app/myevents');
 					$('.add-new-event').hide();
 					$('.notification').text('Event added to My Events')
-					$('.go-back').show();
-					console.log('NEW EVENT DATA', addShow, addEventVenue, addEventId);
+					$('.search-again').show();
 				})
 				.fail(err => {
 					console.log(err)
@@ -194,21 +211,21 @@ const myEventsDetails = () => {
 		event.preventDefault();
 		const myEventId = $(event.target).attr('data-myEventsId');
 		const mongoId = $(event.target).attr('data-mongo-id');
-		$('.event-table, .new-event-button, .welcome-user').hide();
+		$('.event-table, .welcome-user').hide();
 		
+		
+
 		if(myEventId) {
 			eventDetails(myEventId);
 		}
 		else {
 			customEventDetails(mongoId)
 		}
-		console.log("my event id is ", myEventId);
 	})
 }
 
 const repaintEventTable = events => {
-	const top = `<caption>Events</caption>	
-					<tr class="append-table">
+	const top = `	<tr>
 						<th>Event</th>
 						<th>Venue</th>
 						<th>Date</th>
@@ -307,7 +324,7 @@ const submitLogin = () => {
 		.done(data => {
 			console.log("THE DATA", data);
 			if (data.redirect == '/app/concert') {
-				window.location.replace("/app/concert")
+				window.location.replace("/app/myEvents")
 			};
 		})
 		.fail(err => {
