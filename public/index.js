@@ -18,15 +18,18 @@ const eventTemplate = `<div class="big-event-container">
 							<p class="event-address">Address: </p>
 							<h2 class="all-artist-caption">All performing Artist</h2>
 							<p class="event-performers"></p>
-							<form>
+							<form method="GET" action="/app/myEvents">
 								<input type="hidden" class="myEventId" name="eventId" value="">
 								<input type="hidden" class="myEventShow" name="mainArtist" value="">
 								<input type="hidden" class="myEventVenue" name="eventName" value="">
 								<input type="hidden" class="myEventDate" name="eventTime" value="">
 								<input type="submit" class="add-new-event" value="Add to my Events">
-								<input type="submit" class="back-to-events hidden" value="Add another event"
+								<p class="notification"></p>
+								<input type="submit" class="back-to-events hidden" value="Back to My Events">
 							</form>
-							<p class="notification"></p>
+							<form method="GET" action="/app/concert" class="search-again-container">
+								<input class="search-again hidden" type="submit" value="Search Again">
+							</form>
 						</div>
 					</div>`
 
@@ -111,9 +114,7 @@ const eventDetails = (event) => {
 			if(eventArr.eventIds.includes(data.id)) {
 				$template.find('.add-new-event').hide();
 				$template.find('.back-to-events').removeClass('hidden');
-				$('.notification').text('Event already added to your events')
 			}
-
 			$('.append-event').append($template);
 		});
 	})
@@ -196,9 +197,9 @@ const addNewEvent = () => {
 				    },
 				})
 				.done(data => {
-					$('.add-new-event').hide();
+					$('.add-new-event, .new-button-container').hide();
 					$('.notification').text('Event added to My Events')
-					$('.search-again').show();
+					$('.search-again, .notification').show();
 				})
 				.fail(err => {
 					console.log(err)
@@ -265,7 +266,7 @@ const deleteEvent = () => {
 }
 
 const addEventToData = (event) =>{
-	$('body').on('click', '.add-event-submit', (event) => {
+	$('body').on('submit', '.signup-form', (event) => {
 		event.preventDefault();
 		const newEvent = $('.event-input').val();
 		const newVenue = $('.venue-input').val();

@@ -37,21 +37,40 @@ input#my-events-link, input#logout-link {
 	font-size: 25px;
 }
 
-/*.nav-content .title {
-	font-size: 40px;
-}*/
+.h1-header {
+	color: red;
+	font-size: 38px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+div.new-event-container, div#signup-container {
+	text-align: center;
+	margin: 0 auto;
+}
+
+div.new-event-container {
+	margin-top: 5%
+}
+
+div#login-container {
+	margin-top: 10%;
+	width: 420px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 
 #signup-container, #login-container, .new-event-container {
-	position: absolute;
-	width: 420px;
-	right: 500px;
-	top: 36%;
+	/*position: absolute;*/
+	width: 375px;
+	/*right: 500px;*/
+	/*top: 36%;*/
 	text-align: center;
 	border: 2px solid black;
 	padding-top: 25px;
 	padding-bottom: 25px;
 	background-color: #EBEDEF;
-	/*margin-top: 50px;*/
+	margin-top: 50px;
 }
 
 #landing-header, .sign-up-header {
@@ -71,17 +90,22 @@ input#my-events-link, input#logout-link {
 
 .signup-form .username-input, .signup-form .password-input, .signup-form .firstname-input, .signup-form .lastname-input, .event-input, .venue-input, .date-input, .artist-input, .venue-location {
 	width: 75%;
-	margin-left: 50px;
+	/*margin-left: 15%;*/
 	border: 1px solid black;
+	/*margin-bottom: 25px;*/
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .signup-form .signup-submit, .add-event-submit {
 	height: 40px;
 	width: 200px;
-	position: relative;
-	left: 110px;
+	/*position: relative;*/
+	/*left: 110px;*/
+	margin: 0 auto;
 	background-color: #2ECC71;
 	color: white;
+	border: 1px solid black;
 }
 
 .main-input {
@@ -190,6 +214,10 @@ input#my-events-link, input#logout-link {
 	margin-bottom: 15px;
 }
 
+/*input.back-to-events {
+	margin: 3px;
+}*/
+
 .back-container {
 	text-align: center;
 }
@@ -240,11 +268,11 @@ td.myEventsLink, td.delete-event {
 }
 
 td.myEventsLink {
-	color: red;
+	color: blue;
 }
 
 td.delete-event {
-	color: blue;
+	color: red;
 }
 
 .welcome-user {
@@ -288,7 +316,7 @@ td.delete-event {
 	border-radius: 25px
 }
 
-.event-notice, .notification {
+.event-notice, .notification, .notify {
 	color: red;
 }
 
@@ -298,9 +326,16 @@ td.delete-event {
 	width: 100px;
 	font-size: 15px;
 	border: 1px solid black;
-	position: relative;
-	left: 46%;
-	top: 600px;
+	/*position: relative;*/
+	/*left: 46%;*/
+	/*top: 600px;*/
+}
+
+.search-again-container {
+	/*text-align: center;*/
+	position: absolute;
+	top: 89%;
+	right: 46%;
 }
 
 .button-caption {
