@@ -9,8 +9,8 @@ const userRouter = express.Router();
 const jsonParser = bodyParser.json();
 
 userRouter.post('/', (req, res) => {
-
-	const requiredFields = ['username', 'password'];
+	console.log("this is the req", req)
+	const requiredFields = ['username', 'password', 'firstName', 'lastName'];
 	const missingField = requiredFields.find(field => !(field in req.body));
 
 	if (missingField) {
@@ -19,7 +19,7 @@ userRouter.post('/', (req, res) => {
 			reason: 'ValidationError',
 			message: 'Missing field',
 			location: missingField
-		});
+		}); 
 	}
 
 	const stringFields = ['username', 'password', 'firstName', 'lastName'];
@@ -131,8 +131,9 @@ userRouter.post('/', (req, res) => {
 });
 
 userRouter.get('/logout', (req, res) => {
+	req.session.destroy();
 	req.logout();
-  	res.redirect('/app');
+  	res.redirect('/app/login');
 })
 
 module.exports = {userRouter}

@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const {User, Event} = require('../models/users');
 
 eventRouter.post('/', isLoggedIn(), (req, res) => {
-	console.log("REQBODYYYYYYYYY", req.body)
 	const userId = req.user._id;
 	const id = req.body.addId;
 	const event = req.body.show;
@@ -42,11 +41,11 @@ eventRouter.delete('/', (req, res) => {
 });
 
 eventRouter.get('/', (req, res) => {
-	res.render('myEvents')
+	const userEvents = req.user.events;
+		res.render('concert', {user: req.user});
 });
 
 eventRouter.get('/:id', (req, res) => {
-	console.log('coming in', req.user)
 	User.findOne({_id: req.user._id})
 	.then(user => {
 		const customEvent = user.events.filter(event => {

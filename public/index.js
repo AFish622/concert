@@ -28,8 +28,8 @@ const eventTemplate = `<div class="big-event-container">
 								<input type="submit" class="back-to-events hidden" value="Back to My Events">
 							</form>
 							<form method="GET" action="/app/concert" class="search-again-container">
-								<input class="search-again hidden" type="submit" value="Search Again">
 							</form>
+							<input class="search-again hidden" type="submit" value="Search Again">
 						</div>
 					</div>`
 
@@ -85,7 +85,6 @@ const eventDetails = (event) => {
 		url: `/myevents/${event}/registered`
 	})
 	.then(eventArr => {
-		console.log("EEEEEE", eventArr)
 		$.getJSON("/songkick/event/" + event, (data) => {
 			console.log("THE DATA", data);
 			const eventId = data.id;
@@ -143,6 +142,8 @@ const customEventDetails = id => {
 		template.find('.event-address').append(location);
 		template.find('.event-date').append(date);
 		template.find('.event-performers').append(artist);
+		template.find('.add-new-event').hide();
+		template.find('.back-to-events').removeClass('hidden');
 		$('.append-event').append(template);
 	})
 }
@@ -153,7 +154,7 @@ const searchQuery = () => {
 		const query = $('.main-search').val();
 		$('.main-search').val('');
 		$('.results-container').show();
-		$('.event-table, .new-event-container, .big-event-container, .welcome-user').hide();
+		$('.event-table, .new-event-container, .big-event-container, .welcome-user, .search-again, .no-events').hide();
 		$('.search-results').text('');
 		$('.search-results').show();
 		getArtistData(query);
@@ -207,6 +208,13 @@ const addNewEvent = () => {
 			})
 }
 
+var clickOnNewEvent = function() {
+	$('body').on('click', '.new-event-button', function(event) {
+		event.preventDefault();
+		window.location.replace("/app/addEvent");
+	})
+}
+
 const myEventsDetails = () => {
 	$('body').on('click', '.myEventsLink', (event) => {
 		event.preventDefault();
@@ -214,8 +222,6 @@ const myEventsDetails = () => {
 		const mongoId = $(event.target).attr('data-mongo-id');
 		$('.event-table, .welcome-user').hide();
 		
-		
-
 		if(myEventId) {
 			eventDetails(myEventId);
 		}
@@ -226,6 +232,12 @@ const myEventsDetails = () => {
 }
 
 const repaintEventTable = events => {
+	console.log("eeeeeê", events)
+	if (events.length == 0) {
+		$('.event-table').hide();
+		$('.no-events').show();
+	}
+	else {
 	const top = `	<tr>
 						<th>Event</th>
 						<th>Venue</th>
@@ -242,13 +254,19 @@ const repaintEventTable = events => {
 				 </tr>`
 	})
 	$('.event-table').html(top + toAppend)
+	}
 }
+
+// const repaintMyEvents = events => {
+// 	console.log(events);
+// 	window.location.replace("/app/myevents");
+// 	console.log(events.length)
+// }
 
 const deleteEvent = () => {
 	$('body').on('click', '.delete-event', (event) => {
 		event.preventDefault();
 		const deleteId = $(event.target).attr('data-deleteId');
-		console.log('the id i want to delete is ', deleteId);
 		$.ajax({
 			url: '/myEvents',
 			method: 'DELETE',
@@ -257,6 +275,7 @@ const deleteEvent = () => {
 			}
 		})
 		.done(res => {
+			console.log("delete", res)
 			repaintEventTable(res.events)
 		})
 		.fail(err => {
@@ -266,7 +285,7 @@ const deleteEvent = () => {
 }
 
 const addEventToData = (event) =>{
-	$('body').on('submit', '.signup-form', (event) => {
+	$('body').on('submit', '.new-event-form', (event) => {
 		event.preventDefault();
 		const newEvent = $('.event-input').val();
 		const newVenue = $('.venue-input').val();
@@ -292,7 +311,22 @@ const addEventToData = (event) =>{
 		})
 	});
 }
-	
+
+// const clickOnNavEvents = () => {
+// 	$('body').on('click', '#nav-events', (event) => {
+// 		event.preventDefault();
+// 		$.ajax({
+// 			url: '/myevents',
+// 			method: 'GET'
+// 		})
+// 		.done(data => {
+// 			console.log("DDDDAAAATTAA", data);
+// 		})
+// 		.fail(err => {
+// 			console.log(err);
+// 		})
+// 	})
+// }
 
 const clickOnLandingSingup = () => {
 	$('body').on('click', '.landing-signup', (event) => {
@@ -305,13 +339,47 @@ const clickOnLandingSingup = () => {
 const clickOnLandingLogin = () => {
 	$('body').on('click', '.landing-login', (event) => {
 		event.preventDefault();
-		window.location.replace("/app/login")
+		window.location.replace('/app/login')
 		console.log('landing-login-worked')
 	})
 }
 
-const submitLogin = () => {
+const searchAgain = () => {
+	$('body').on('click', '.search-again', (event) => {
+		event.preventDefault();
+		console.log('works')
+		window.location.replace('/app/concert')
+	})
+}
+
+const newSignup = () => {
 	$('.signup-form').on('submit', (event) => {
+		event.preventDefault();
+		const username = $('.username-input').val();
+		const password = $('.password-input').val();
+		const firstName = $('.firstName-input').val();
+		const lastName =  $('.lastName-input').val();
+		$.ajax({
+			url: '/users',
+			method: "POST",
+			data: {
+				username: username,
+				password: password,
+				firstName: firstName,
+				lastName: lastName
+			}
+		})
+		.then(user => {
+			window.location.replace("/app/login");
+		})
+		.fail(err => {
+			console.log(err);
+		})
+	})
+}
+
+const submitLogin = () => {
+	$('.login-form').on('submit', (event) => {
 		event.preventDefault();
 		const username = $('.username-input').val();
 		const password = $('.password-input').val();
@@ -323,10 +391,12 @@ const submitLogin = () => {
 			password
 		})
 		.done(data => {
-			console.log("THE DATA", data);
-			if (data.redirect == '/app/concert') {
-				window.location.replace("/app/myEvents")
-			};
+			if (data.redirect == '/app/myEvents') {
+				window.location.replace('/app/myEvents')
+			}
+			else {
+				window.location.replace('/app/concert')
+			}
 		})
 		.fail(err => {
 			console.log(err)
@@ -338,7 +408,9 @@ $(function() {
 	searchQuery();
 	clickOnArtist();
 	clickOnEvent();
+	newSignup();
 	submitLogin();
+	// clickOnNavEvents();
 	clickOnLandingSingup();
 	clickOnLandingLogin();
 	myEventsDetails();
@@ -346,16 +418,10 @@ $(function() {
 	clickOnNewEvent();
 	addNewEvent();
 	addEventToData();
+	searchAgain();
 	// getGeo();
 })
 
-
-var clickOnNewEvent = function() {
-	$('body').on('click', '.new-event-button', function(event) {
-		event.preventDefault();
-		window.location.replace("/app/addEvent");
-	})
-}
 
 // $(document).ready(function() {
 // 	getLocation();

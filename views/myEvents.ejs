@@ -10,7 +10,7 @@
 		<% include ./partials/nav %>
 		<% include ./partials/head %>
 	</header>
-
+	
 	<!-- <h1 class="title">Concert Calendar</h1> -->
 
 	<div class="results-container">
@@ -21,27 +21,33 @@
 	<p class="append-event"></p>
 	</div>
 	<p class="welcome-user"><%= user.firstName %>'s Events</p>
+	<h2 class="no-events hidden">No Events in Calendar</h2>
 	
 	<!-- <p class="search-results"></p> -->
-
-	<table class="event-table">
-			<tr>
-				<th>Event</th>
-				<th>Venue</th>
-				<th>Date</th>
-			</tr>
-
-
-			<% for(var i=0; i<user.events.length; i++) {%>
+	<% if (user.events.length) { %>
+		<table class="event-table">
+			<thead>
 				<tr>
-		   			<td><%= user.events[i].event %></td>
-		   			<td><%= user.events[i].venue %></td>
-		   			<td><%= user.events[i].date %></td>
-		   			<td class="myEventsLink" data-myEventsId="<%= user.events[i].eventId %>" data-mongo-id="<%= user.events[i]._id %>">Event Info</td>
-					<td class="delete-event" data-deleteId="<%= user.events[i]._id %>">Delete Event</td>
-		   		</tr>
-			<% } %>
-	</table>
+					<th>Event</th>
+					<th>Venue</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(var i=0; i<user.events.length; i++) {%>
+					<tr>
+			   			<td><%= user.events[i].event %></td>
+			   			<td><%= user.events[i].venue %></td>
+			   			<td><%= user.events[i].date %></td>
+			   			<td class="myEventsLink" data-myEventsId="<%= user.events[i].eventId %>" data-mongo-id="<%= user.events[i]._id %>">Event Info</td>
+						<td class="delete-event" data-deleteId="<%= user.events[i]._id %>">Delete Event</td>
+			   		</tr>
+				<% } %>
+			</tbody>	
+		</table>
+	<% } else { %>
+		<h2 class='no-events'>No Events in Calendar</h2>
+	<% } %>
 
 	<div class="new-button-container">
 		<p class="button-caption">Can't find your event?</p>

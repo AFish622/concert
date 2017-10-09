@@ -36,14 +36,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(session({
-  secret: 'keyboard cat',
-  saveUninitialized: true,
-  resave: true
+  secret: 'keyboard cat'
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(basicStrategy);
-passport.use(jwtStrategy);
+// passport.use(jwtStrategy);
 app.use(morgan('common'));
 app.set('view engine', 'ejs');
 
@@ -60,13 +58,13 @@ app.use('/app', appRouter);
 app.use('/songkick', songRouter);
 app.use('/myevents', eventRouter)
 
-app.get('/api/protected',
-	passport.authenticate('jwt', {session: false}),
-	(req, res) => {
-		return res.json({
-			data: 'It worked'
-		});
-	})
+// app.get('/api/protected',
+// 	passport.authenticate('jwt', {session: false}),
+// 	(req, res) => {
+// 		return res.json({
+// 			data: 'It worked'
+// 		});
+// 	})
 
 app.use('*', (req, res) => {
 	return res.status(404).json({message: 'Not Found'});

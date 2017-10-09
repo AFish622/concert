@@ -1,5 +1,36 @@
 
-	<div class="nav-bar" role="navigation">
+	<div class="nav-bar w3-row w3-border" role="navigation">
+		<ul>
+			<div class="quarter w3-container">
+				<li>
+					<form method="GET" action="/app/myevents">
+						<input type="submit" id="nav-events" value="My Events">
+					</form>
+				</li>
+			</div>
+			<div class="half w3-container">
+				<li>
+					<form class="main-form" action="app/concert">
+						<input class="main-search" type="text" name="search-concerts" placeholder="Search by artist or keyword" autofocus>
+						<input class="main-submit" type="submit" name="main-submit" value="Search">
+					</form>
+				</li>
+			</div>
+			<div class="quarter w3-container">
+				<li>
+					<form  method="GET" action="/users/logout">
+						<input type="submit" id="logout-link" value="Logout">
+					</form>
+				</li>
+			</div>
+		</ul>
+	</div>
+		<!-- <li>
+				<a id="logout-link" href='/users/logout'>logout</a>
+			</li> -->
+	<!-- </div> -->
+
+<!-- 	<div class="nav-bar" role="navigation">
 		<form method="GET" action="/app/myevents">
 			<input type="submit" id="my-events-link" value="My Events">
 		</form>
@@ -15,5 +46,5 @@
 				<input class="main-submit" type="submit" name="main-submit" value="Search">
 			</form>
 		</div>
-	</div>
-	
+	</div> -->
+
