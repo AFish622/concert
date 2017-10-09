@@ -312,22 +312,6 @@ const addEventToData = (event) =>{
 	});
 }
 
-// const clickOnNavEvents = () => {
-// 	$('body').on('click', '#nav-events', (event) => {
-// 		event.preventDefault();
-// 		$.ajax({
-// 			url: '/myevents',
-// 			method: 'GET'
-// 		})
-// 		.done(data => {
-// 			console.log("DDDDAAAATTAA", data);
-// 		})
-// 		.fail(err => {
-// 			console.log(err);
-// 		})
-// 	})
-// }
-
 const clickOnLandingSingup = () => {
 	$('body').on('click', '.landing-signup', (event) => {
 		event.preventDefault();
@@ -410,7 +394,6 @@ $(function() {
 	clickOnEvent();
 	newSignup();
 	submitLogin();
-	// clickOnNavEvents();
 	clickOnLandingSingup();
 	clickOnLandingLogin();
 	myEventsDetails();

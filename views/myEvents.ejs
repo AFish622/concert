@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title></title>
-	  <link rel="stylesheet" type="text/css" href="/style.css">
-
 </head>
 <body class="main-body">
 	<header>
@@ -23,7 +20,6 @@
 	<p class="welcome-user"><%= user.firstName %>'s Events</p>
 	<h2 class="no-events hidden">No Events in Calendar</h2>
 	
-	<!-- <p class="search-results"></p> -->
 	<% if (user.events.length) { %>
 		<table class="event-table">
 			<thead>
@@ -31,6 +27,7 @@
 					<th>Event</th>
 					<th>Venue</th>
 					<th>Date</th>
+					<th><th>
 				</tr>
 			</thead>
 			<tbody>
