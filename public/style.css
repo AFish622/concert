@@ -3,12 +3,12 @@
 } 
 
 html {
-    background: url(https://i.pinimg.com/originals/dd/42/de/dd42dea8a3fddd66ef507647c3c3fab7.jpg);
-    background-size: 100% 890px;
+    /*background: url(http://cdn.playbuzz.com/cdn/51b08b66-62f0-4943-a386-677beb62812e/e0bd2c5b-5d89-47ab-863f-3f5603b2f75e.jpg);*/
+    background: url(http://www.backstagetales.com/wp-content/uploads/2016/09/bigstock_silhouettes_of_concert_crowd_i_1565261621.jpg); 
     background-repeat: no-repeat;
     background-attachment: fixed;
-    width: 100%;
-    min-height: 100%;
+    /*width: 100%;*/
+    /*min-height: 100%;*/
 }
 
 
@@ -110,9 +110,6 @@ li {
 		right: 45px;
 	}
 
-	html {
-	background-color: black;
-}
 }
 
 @media (max-width: 760px) {
@@ -199,20 +196,18 @@ li {
 		height: 50px;
 	}
 
-	.button-caption {
-		font-size: 20px
-	}
-
 	input.new-event-button {
 		width: 80%;
 		height: 50px;
 		margin-top: -75px;
 	}
 
-	.button-caption {
+	p.button-caption {
 		font-size: 20px;
 		position: relative;
 		top: -7px;
+		font-size: 20px;
+		color: black;
 	}
 }
 
@@ -351,11 +346,18 @@ li {
 	input#nav-events {
 		position: relative;
 		left: -16px;
+		top: 0px;
 	}
 
 	input.search-again {
 		width: 100px;
 	}
+
+	.landing-page {
+		position: relative;
+		left: 202px;
+	}
+
 }
 
 
@@ -593,7 +595,7 @@ td.myEventsLink, td.delete-event {
 }
 
 td.myEventsLink {
-	color: blue;
+	color: #0209c7;
 }
 
 td.delete-event {
@@ -615,9 +617,13 @@ tr:nth-child(even) {
 }
 
 .landing-container {
-	color: white;
+	color: black;
 	text-align: center;
-	margin: auto;
+}
+
+.landing-header {
+	color: red;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .landing-list {
@@ -627,6 +633,7 @@ tr:nth-child(even) {
 
 .landing-header {
 	font-size: 63px;
+	position: 
 }
 
 .landing-title {
@@ -668,7 +675,7 @@ tr:nth-child(even) {
 	right: 46%;
 }
 
-.button-caption {
+p.button-caption {
 	color: white;
 	text-align: center;
 }
@@ -681,4 +688,5 @@ tr:nth-child(even) {
 	color: white;
 	text-align: center;
 }
+
 
