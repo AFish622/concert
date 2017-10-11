@@ -2,15 +2,19 @@
 	font-family: 'Crete Round', serif;
 } 
 
-html {
+body {
     /*background: url(http://cdn.playbuzz.com/cdn/51b08b66-62f0-4943-a386-677beb62812e/e0bd2c5b-5d89-47ab-863f-3f5603b2f75e.jpg);*/
-    background: url(http://www.backstagetales.com/wp-content/uploads/2016/09/bigstock_silhouettes_of_concert_crowd_i_1565261621.jpg); 
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    /*width: 100%;*/
-    /*min-height: 100%;*/
+    background: url(http://www.backstagetales.com/wp-content/uploads/2016/09/bigstock_silhouettes_of_concert_crowd_i_1565261621.jpg) no-repeat center center fixed; 
+  	background-size: cover;
 }
 
+
+div.landing-text {
+	color: red;
+	text-align: center;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+}
 
 .account-link {
 	color: black;
@@ -19,11 +23,15 @@ html {
 input#logout-link {
 	padding-right: 35px;
 	padding-left: 35px;
+	position: relative;
+	/*right: 75px;*/
 }
 
 input#nav-events {
 	padding-left: 35px;
 	padding-right: 35px;
+	position: relative;
+	right: 65px;
 }
 
 
@@ -44,16 +52,22 @@ input#logout-link:hover, input#nav-events:hover, input.main-submit:hover {
 	color: red;
 }
 
+input.main-search {
+	position: relative;
+	right: 35px;
+}
+
+input.main-submit {
+	position: relative;
+	right: 37px;
+}
+
 .quarter {
 	width: 25%;
 }
 
 .half {
 	width:50%;
-}
-
-body {
-	color: black;
 }
 
 ul.nav-container {
@@ -83,38 +97,64 @@ li {
 		position: relative;
 		top: 8px;
 	}
+
+	div#login-conatiner {
+		margin-top: 300px;
+		width: 50%;
+		padding: 50px;
+	}
 }
 
 @media (max-width: 768px) {
 	input#nav-events {
 		position: relative;
 		right: 55px;
-		top: 8px;
+		top: 25px;
 	}
 
 	input#logout-link {
 		position: relative;
-		top: 8px;
-		right: 36px;
+		top: 26px;
+		right: 29px;
 	}
 
 	input.main-search {
 		position: relative;
-		right: 45px;
+		right: 93px;
 		font-size: 20px;
-		bottom: 3px;
+		bottom: -26px;
 		font-size: 20px
 	}
 
 	input.main-submit {
-		right: 45px;
+		right: -93px;
+		top: -29px;
 	}
 
+	div.big-event-container {
+		width: 80%;
+	}
+
+	/*div#login-container {
+		margin-top: 200px
+	}
+*/
 }
 
 @media (max-width: 760px) {
 	ul {
 		flex-direction: column;
+	}
+
+
+	div.landing-page {
+		padding-top: 50%;
+		padding-left: 0%;
+	}
+
+	div.landing-inputs {
+		position: relative;
+		left: 100px;
 	}
 
 	input.main-submit {
@@ -253,12 +293,32 @@ li {
 		font-size: 19px;
 	}
 
-
 }
 
 @media (max-width: 414px) {
 	input#logout-link {
 		right: 37px;
+		top: 29px;
+	}
+
+	input.main-search {
+		top: 5px;
+	}
+
+	div.big-event-container {
+		width: 90%;
+	}
+
+	div.results-container {
+		width: 90%;
+	}
+
+	input#nav-events {
+		top: 1px;
+	}
+
+	input.main-submit {
+		top: 1px;
 	}
 }
 
@@ -303,7 +363,9 @@ li {
 	}
 
 	input.main-submit {
-		left: -187px;
+		left: -191px;
+		top: 0px;
+
 	}
 
 	input#nav-events {
@@ -313,6 +375,7 @@ li {
 
 	input#logout-link {
 		left: 207px;
+		top: 28px;
 	}
 
 	div.new-event-container {
@@ -332,10 +395,12 @@ li {
 	input.main-search {
 		width: 298px;
 		left: -59px;
+		top: 1px;
 	}
 
 	input.main-submit {
-		left: -195px;
+		left: -199px;
+		top: -3px
 	}
 
 	input#logout-link {
@@ -353,11 +418,31 @@ li {
 		width: 100px;
 	}
 
-	.landing-page {
+	./*landing-page {
 		position: relative;
 		left: 202px;
 	}
+*/
+}
 
+@media (max-width: 320px) {
+	input.main-search {
+		left: -84px;
+	}
+
+	input.main-submit {
+		left: -223px;
+	}
+
+	input#nav-events {
+		left: -40px;
+		top: 0px;
+	}
+
+	input#logout-link {
+		top: 27px;
+		left: 162px;
+	}
 }
 
 
@@ -380,7 +465,7 @@ div.new-event-container {
 }
 
 div#login-container {
-	margin-top: 10%;
+	/*margin-top: 10%;*/
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -614,11 +699,6 @@ tr:nth-child(even) {
 	color: white;
 	text-align: center;
 	font-size: 25px;
-}
-
-.landing-container {
-	color: black;
-	text-align: center;
 }
 
 .landing-header {
