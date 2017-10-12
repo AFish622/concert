@@ -8,7 +8,7 @@ const morgan = require('morgan');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
+const path = require('path')
 
 const {PORT, DATABASE_URL} = require('./config');
 const {userRouter} = require('./routes/userRouter');
@@ -29,7 +29,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public'), {index: '_'}))
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -52,11 +53,18 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.get('/', (req, res) => {
+	console.log('hitting slash')
+	res.render('index')
+})
+
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/app', appRouter);
 app.use('/songkick', songRouter);
 app.use('/myevents', eventRouter)
+
+
 
 // app.get('/api/protected',
 // 	passport.authenticate('jwt', {session: false}),
