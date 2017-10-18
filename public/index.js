@@ -1,15 +1,3 @@
-const mainTemplate = `<table class="event-table">
-						<caption>Events</caption>	
-							</tr class="row-event">
-								<th>Artist</th>
-								<th>Date</th>
-							</tr>
-							<tr>
-							<td class="table-artist"></td>
-							<td class="table-date"></td>
-							</tr>
-					</table>`
-
 const eventTemplate = `<div class="big-event-container">
 						<div>
 							<h1 class="event-name"></h1>
@@ -242,6 +230,8 @@ const repaintEventTable = events => {
 						<th>Event</th>
 						<th>Venue</th>
 						<th>Date</th>
+						<th></th>
+						<th></th>
 					</tr>`
 
 	const toAppend = events.map(event => {
@@ -367,24 +357,34 @@ const submitLogin = () => {
 		event.preventDefault();
 		const username = $('.username-input').val();
 		const password = $('.password-input').val();
-		
-		$.ajax({
-			url: "/auth/login",
-			method: "POST",
-			username, 
-			password
-		})
-		.done(data => {
-			if (data.redirect == '/app/myEvents') {
-				window.location.replace('/app/myEvents')
-			}
-			else {
-				window.location.replace('/app/concert')
-			}
-		})
-		.fail(err => {
-			console.log(err)
-		})
+		loginRequest(username, password);
+	})
+}
+
+const submitDemo = () => {
+	$('body').on('click', '.landing-demo', (event) => {
+		event.preventDefault();
+		loginRequest('Demo', 123);
+	})
+}
+
+const loginRequest = (username, password) => {
+	$.ajax({
+		url: "/auth/login",
+		method: "POST",
+		username, 
+		password
+	})
+	.done(data => {
+		if (data.redirect == '/app/myEvents') {
+			window.location.replace('/app/myEvents')
+		}
+		else {
+			window.location.replace('/app/concert')
+		}
+	})
+	.fail(err => {
+		console.log(err)
 	})
 }
 
@@ -394,6 +394,7 @@ $(function() {
 	clickOnEvent();
 	newSignup();
 	submitLogin();
+	submitDemo();
 	clickOnLandingSingup();
 	clickOnLandingLogin();
 	myEventsDetails();
@@ -402,58 +403,5 @@ $(function() {
 	addNewEvent();
 	addEventToData();
 	searchAgain();
-	// getGeo();
 })
 
-
-// $(document).ready(function() {
-// 	getLocation();
-
-// });
-
-// var x = document.getElementById("demo");
-
-// function getLocation() {
-// 	if(navigator.geolocation) {
-// 		navigator.geolocation.getCurrentPosition(showPosition);
-// 	}
-// 	else {
-// 		x.innerHTML = "Geolocation not supported by this browser"
-// 	}
-// }
-
-// function showPosition(position) {
-// 	x.innerHTML = "Latitude: " + position.coords.latitude + 
-// 	"<br>Longitude: " + position.longitude;
-// }
-
-// const getVenueData = function(name) {
-// 	$.getJSON("http://api.songkick.com/api/3.0/search/venues.json?query=" + name + "&apikey=y6tnZdtdNsMK4JG3", function(data) {
-// 		console.log("venue", data);
-// 		for (let i = 0; i < data.resultsPage.results.venue.length; i++) {
-// 			let venueName = data.resultsPage.results.venue[i].displayName;
-// 			let venueStreet = data.resultsPage.results.venue[i].street;
-// 			let venueCity = data.resultsPage.results.venue[i].metroArea.displayName;
-// 			// let venueState = data.resultsPage.results.venue[i].metroArea.state.displayName;
-// 			let venueAddress = venueStreet + ' ' + venueCity;
-// 			$('.myTable').after('<tr><th class="tableArtist">' + venueName + '</th><td>' + venueAddress + '</tr>');
-// 		}
-// 	});
-// }
-
-
-// const getGeo = function () {
-// 	$.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=1060+Bush+Street,+San+Francisco,+CA&key=AIzaSyAROW-3VQEqRj_dwg8Gmexm7JxWO335gBI", 
-// 	function(data) {
-// 		console.log("GEO", data);
-// 	});
-// }
-
-// const youTubeKey = "AIzaSyAROW-3VQEqRj_dwg8Gmexm7JxWO335gBI"
-
-// callApi = function(name) {
-// 	$.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y6tnZdtdNsMK4JG3&artist_name=" + name, function(data) {
-// 		console.log("11111", data)
-// 		console.log(data.resultsPage.results.event.length)
-// 	});
-// }

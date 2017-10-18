@@ -27,10 +27,6 @@ appRouter.get('/myevents', isLoggedIn(), (req, res) => {
 	User.findOne({_id: req.user._id})
 		.then(user => {
 				res.render('myEvents', {user});
-			// res.render('myEvents', {user});
-			// res.render('concert', {user});
-
-			// res.json({events: user.events});
 		})
 });
 
@@ -40,7 +36,6 @@ appRouter.get('/addEvent', (req, res) => {
 
 function isLoggedIn () {  
 	return (req, res, next) => {
-		// console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
 
 	    if (req.isAuthenticated()) return next();
 	    res.redirect('/app/login')

@@ -65,15 +65,6 @@ app.use('/songkick', songRouter);
 app.use('/myevents', eventRouter)
 
 
-
-// app.get('/api/protected',
-// 	passport.authenticate('jwt', {session: false}),
-// 	(req, res) => {
-// 		return res.json({
-// 			data: 'It worked'
-// 		});
-// 	})
-
 app.use('*', (req, res) => {
 	return res.status(404).json({message: 'Not Found'});
 });

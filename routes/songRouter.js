@@ -29,28 +29,6 @@ songRouter.get('/event/:id', (req, res) => {
 		res.json(event);
 	})
 
-	// .then(artists => {
-	// 	const promises = artists.map(artist => {
-	// 		return new Promise(resolve => {
-	// 			if (artist.onTourUntil) {
-	// 				songkickApi.getArtistUpcomingEvents(artist.id)
-	// 				.then(events => {
-	// 					resolve(events);
-	// 				})
-	// 			}
-	// 			else {
-	// 				console.log("ARRRRTIST", artist)
-	// 				resolve(artist);
-	// 			}
-	// 		})
-	// 	})
-	// 	Promise.all(promises)
-	// 	.then(artistsEvents => {
-	// 		console.log("ARTIST EVENTS", artistsEvents)
-	// 		res.json({artistsEvents})
-	// 	})
-	// })
-
 
 })
 

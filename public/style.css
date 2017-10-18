@@ -14,9 +14,11 @@ div.landing-text {
 	color: red;
 	text-align: center;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-
 }
 
+.landing-header {
+	text-align: center;
+}
 .account-link {
 	color: black;
 }
@@ -25,7 +27,7 @@ input#logout-link {
 	padding-right: 35px;
 	padding-left: 35px;
 	position: relative;
-	/*right: 75px;*/
+	right: 18px;
 }
 
 input#nav-events {
@@ -176,16 +178,6 @@ div#login-container {
 	text-shadow: -1px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
 }
 
-/*.main-body {
-    background: url(https://i.pinimg.com/originals/dd/42/de/dd42dea8a3fddd66ef507647c3c3fab7.jpg);
-    background-size: 100% 890px;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    width: 100%;
-    min-height: 100%;
-}
-*/
-
 .results-container {
 	background-color: #B2BABB;
 	width: 50%;
@@ -226,10 +218,12 @@ div#login-container {
 	font-size: 40px;
 }
 
-.concert-header {
+h2.concert-header {
 	text-align: center;
 	color: white;
 	font-size: 30px;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
 }
 
 .new-event-button {
@@ -239,8 +233,6 @@ div#login-container {
 	font-size: 15px;
 	margin-bottom: 50px;
 	border: 1px solid black;
-	/*position: relative;*/
-	/*bottom: 115px;*/
 }
 
 .add-new-event, .back-to-events {
@@ -253,9 +245,9 @@ div#login-container {
 	margin-bottom: 15px;
 }
 
-/*input.back-to-events {
-	margin: 3px;
-}*/
+.landing-body {
+	margin-right: 1%;
+}
 
 .back-container {
 	text-align: center;
@@ -309,6 +301,7 @@ th, td {
 
 td {
 	text-align: left;
+	border: 1px solid black;
 }
 
 td.myEventsLink, td.delete-event {
@@ -354,7 +347,7 @@ tr:nth-child(even) {
 	font-size: 45px
 }
 
-.landing-signup, .landing-login {
+.landing-signup, .landing-login, .landing-demo {
 	height: 70px;
 	width: 175px;
 	margin-right: 35px;
@@ -364,8 +357,9 @@ tr:nth-child(even) {
 }
 
 .landing-inputs {
-	position: relative;
-	left: 36%;
+	/*position: relative;*/
+	/*left: 36%;*/
+	margin-left: 28%;
 	border-radius: 25px
 }
 
@@ -426,6 +420,22 @@ p.button-caption {
 	input#nav-events {
 		top: 10px;
 	}
+
+	input.landing-signup {
+		position: relative;
+		right: 70px;
+	}
+
+	input.landing-login {
+		position: relative;
+		right: 70px;
+	}
+
+	input.landing-demo {
+		position: relative;
+		right: 70px;
+	}
+
 }
 
 @media (max-width: 768px) {
@@ -452,6 +462,7 @@ p.button-caption {
 	input.main-submit {
 		right: -93px;
 		top: -29px;
+		width: 100px;
 	}
 
 	div.big-event-container {
@@ -459,7 +470,36 @@ p.button-caption {
 	}
 
 	p.welcome-user {
+		color: white;
 		padding-bottom: 60px;
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	}
+
+	.landing-inputs {
+		display: inline;
+	}
+
+	input.landing-signup {
+		position: relative;
+		right: 100px;
+	}
+
+	input.landing-login {
+		position: relative;
+		right: 100px;
+	}
+
+	input.landing-demo {
+		position: relative;
+		right: 100px;
+	}
+
+	.concert-header {
+		margin-left: 97px;
+	}
+
+	.landing-title {
+		margin-left: 93px;
 	}
 }
 
@@ -584,10 +624,9 @@ p.button-caption {
 
 	td {
 		border: none;
-		border-bottom: 1px solid #eee;
+		border-bottom: 1px solid black !important;
 		position: relative;
-		padding-left: 50%;
-		text-align: right;
+		text-align: left;
 	}
 
 	td:before {
@@ -674,6 +713,7 @@ p.button-caption {
 	input#logout-link {
 		right: 37px;
 		top: 29px;
+		padding-left: 34px;
 	}
 
 	input.main-search {
@@ -690,17 +730,48 @@ p.button-caption {
 
 	input#nav-events {
 		top: 1px;
+		padding-left: 34px;
 	}
 
 	input.main-submit {
 		top: 1px;
 	}
+
+	input.landing-signup {
+		margin-left: -55px;
+		margin-bottom: 10px;
+	}
+
+	input.landing-login {
+		margin-left: -55px;
+		margin-bottom: 10px;
+	}
+
+	input.landing-demo {
+		margin-left: -55px;
+		margin-bottom: 20px;
+	}
+
+	.landing-header {
+		margin-left: 91px;
+	}
+
+	.landing-title {
+		margin-left: 88px;
+	}
+
+	ul.landing-list {
+		margin-left: 28px;
+		color: white;
+	}
+
+	.landing-inputs {
+		display: block;
+		margin-left: 50%;
+	}
 }
 
 @media (max-width: 465px) {
-	td {
-		text-align: right;
-	}
 
 	thead tr {
 		position: absolute;
@@ -746,15 +817,33 @@ p.button-caption {
 	input#nav-events {
 		left: -25px;
 		top: 1px;
+		padding-left: 32px;
 	}
 
 	input#logout-link {
 		left: 207px;
 		top: 28px;
+		padding-right: 21px;
 	}
 
 	div.new-event-container {
 		width: 90%;
+	}
+
+	input.landing-signup {
+		margin-left: -65px;
+	}
+
+	input.landing-login {
+		margin-left: -65px;
+	}
+
+	input.landing-demo {
+		margin-left: -65px;
+	}
+
+	.landing-inputs {
+		margin-left: 54%;
 	}
 }
 
@@ -792,11 +881,30 @@ p.button-caption {
 	input.search-again {
 		width: 100px;
 	}
+
+	input.landing-signup {
+		height: 60px;
+	}
+
+	input.landing-login {
+		height: 60px;
+	}
+
+	input.landing-demo {
+		height: 60px;
+	}
+
+	.landing-inputs {
+		display: block;
+		margin-left: 55%;
+	}
+
 }
 
 @media (max-width: 320px) {
 	input.main-search {
 		left: -84px;
+		text-align: center;
 	}
 
 	input.main-submit {
@@ -805,12 +913,39 @@ p.button-caption {
 
 	input#nav-events {
 		left: -40px;
-		top: 0px;
+		padding-left: 34px !important;
+		font-size: 18px;
 	}
 
 	input#logout-link {
-		top: 27px;
+		top: 26px;
 		left: 162px;
+		padding-right: 30px;
+	}
+
+	input.landing-signup {
+		margin-left: -73px;
+	}
+
+	input.landing-login {
+		margin-left: -73px;
+	}
+
+	input.landing-demo {
+		margin-left: -73px;
+	}
+
+	.landing-header {
+		margin-left: 76;
+	}
+
+	ul.landing-list {
+		margin-left: 7px;
+		width: 100%;
+	}
+
+	.landing-inputs {
+		margin-left: 60%;
 	}
 }
 

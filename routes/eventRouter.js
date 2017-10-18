@@ -63,14 +63,7 @@ eventRouter.get('/:id/registered', (req, res) => {
 			let userEvents = user.events.map(event => {
 				return event.eventId;
 			})
-			// console.log("XXX", userEvents);
 			res.json({eventIds: userEvents})
-			// if (userEvents = req.params) {
-			// 	res.json({True: 'True'})
-			// }
-			// else {
-			// 	res.json({False: 'False'})
-			// }
 		})
 })
 
