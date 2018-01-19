@@ -1,7 +1,7 @@
 # Concert Calendar
 
-## Conecert and festival tracker app for Thinkfuls (https://www.thinkful.com/) second capstone project. -A server side app
-that allows you to look up upcoming shows and festivals and add them to a personalized calendar to track them with ease.
+## Conecert and festival tracker app for Thinkfuls (https://www.thinkful.com/) second capstone project.
+- A server side app that allows you to look up upcoming shows and festivals and add them to a personalized calendar to track them with ease.
 
 ![alt text](concert/Concert Calendar HomePage.png)
 
